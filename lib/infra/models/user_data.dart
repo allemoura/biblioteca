@@ -1,3 +1,4 @@
+import 'package:biblioteca/domain/entities/user.dart';
 import 'package:biblioteca/infra/models/library_data.dart';
 import 'package:biblioteca/infra/models/raffle_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,6 +19,20 @@ class UserData {
       required this.library,
       required this.raffles,
       this.password});
+
+  factory UserData.fromEntity(User entity) => UserData(
+      name: entity.name,
+      email: entity.email,
+      library: LibraryData.fromEntity(entity.library),
+      raffles: entity.raffles.map((e) => RaffleData.fromEntity(e)).toList(),
+      password: entity.password);
+
+  User toEntity() => User(
+      name: name,
+      email: email,
+      library: library.toEntity(),
+      raffles: raffles.map((e) => e.toEntity()).toList(),
+      password: password);
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);

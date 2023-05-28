@@ -7,7 +7,7 @@ part of 'book_data.dart';
 // **************************************************************************
 
 BookData _$BookDataFromJson(Map<String, dynamic> json) => BookData(
-      name: json['name'] as String,
+      title: json['title'] as String,
       author: json['author'] as String,
       releaseDate: DateTime.parse(json['releaseDate'] as String),
       isbn10: json['isbn10'] as String?,
@@ -16,7 +16,7 @@ BookData _$BookDataFromJson(Map<String, dynamic> json) => BookData(
     );
 
 Map<String, dynamic> _$BookDataToJson(BookData instance) => <String, dynamic>{
-      'name': instance.name,
+      'title': instance.title,
       'author': instance.author,
       'releaseDate': instance.releaseDate.toIso8601String(),
       'isbn10': instance.isbn10,
