@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'author.dart';
+part of 'author_book.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,26 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Author {
+mixin _$AuthorBook {
   String get name => throw _privateConstructorUsedError;
   List<Book> get books => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AuthorCopyWith<Author> get copyWith => throw _privateConstructorUsedError;
+  $AuthorBookCopyWith<AuthorBook> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthorCopyWith<$Res> {
-  factory $AuthorCopyWith(Author value, $Res Function(Author) then) =
-      _$AuthorCopyWithImpl<$Res, Author>;
+abstract class $AuthorBookCopyWith<$Res> {
+  factory $AuthorBookCopyWith(
+          AuthorBook value, $Res Function(AuthorBook) then) =
+      _$AuthorBookCopyWithImpl<$Res, AuthorBook>;
   @useResult
-  $Res call({String name, List<Book> books});
+  $Res call({String name, List<Book> books, String? imageUrl});
 }
 
 /// @nodoc
-class _$AuthorCopyWithImpl<$Res, $Val extends Author>
-    implements $AuthorCopyWith<$Res> {
-  _$AuthorCopyWithImpl(this._value, this._then);
+class _$AuthorBookCopyWithImpl<$Res, $Val extends AuthorBook>
+    implements $AuthorBookCopyWith<$Res> {
+  _$AuthorBookCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -46,6 +49,7 @@ class _$AuthorCopyWithImpl<$Res, $Val extends Author>
   $Res call({
     Object? name = null,
     Object? books = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -56,24 +60,31 @@ class _$AuthorCopyWithImpl<$Res, $Val extends Author>
           ? _value.books
           : books // ignore: cast_nullable_to_non_nullable
               as List<Book>,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AuthorCopyWith<$Res> implements $AuthorCopyWith<$Res> {
-  factory _$$_AuthorCopyWith(_$_Author value, $Res Function(_$_Author) then) =
-      __$$_AuthorCopyWithImpl<$Res>;
+abstract class _$$_AuthorBookCopyWith<$Res>
+    implements $AuthorBookCopyWith<$Res> {
+  factory _$$_AuthorBookCopyWith(
+          _$_AuthorBook value, $Res Function(_$_AuthorBook) then) =
+      __$$_AuthorBookCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, List<Book> books});
+  $Res call({String name, List<Book> books, String? imageUrl});
 }
 
 /// @nodoc
-class __$$_AuthorCopyWithImpl<$Res>
-    extends _$AuthorCopyWithImpl<$Res, _$_Author>
-    implements _$$_AuthorCopyWith<$Res> {
-  __$$_AuthorCopyWithImpl(_$_Author _value, $Res Function(_$_Author) _then)
+class __$$_AuthorBookCopyWithImpl<$Res>
+    extends _$AuthorBookCopyWithImpl<$Res, _$_AuthorBook>
+    implements _$$_AuthorBookCopyWith<$Res> {
+  __$$_AuthorBookCopyWithImpl(
+      _$_AuthorBook _value, $Res Function(_$_AuthorBook) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,8 +92,9 @@ class __$$_AuthorCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? books = null,
+    Object? imageUrl = freezed,
   }) {
-    return _then(_$_Author(
+    return _then(_$_AuthorBook(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -91,14 +103,19 @@ class __$$_AuthorCopyWithImpl<$Res>
           ? _value._books
           : books // ignore: cast_nullable_to_non_nullable
               as List<Book>,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Author implements _Author {
-  const _$_Author({required this.name, required final List<Book> books})
+class _$_AuthorBook implements _AuthorBook {
+  const _$_AuthorBook(
+      {required this.name, required final List<Book> books, this.imageUrl})
       : _books = books;
 
   @override
@@ -112,41 +129,49 @@ class _$_Author implements _Author {
   }
 
   @override
+  final String? imageUrl;
+
+  @override
   String toString() {
-    return 'Author(name: $name, books: $books)';
+    return 'AuthorBook(name: $name, books: $books, imageUrl: $imageUrl)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Author &&
+            other is _$_AuthorBook &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._books, _books));
+            const DeepCollectionEquality().equals(other._books, _books) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(_books));
+      runtimeType, name, const DeepCollectionEquality().hash(_books), imageUrl);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthorCopyWith<_$_Author> get copyWith =>
-      __$$_AuthorCopyWithImpl<_$_Author>(this, _$identity);
+  _$$_AuthorBookCopyWith<_$_AuthorBook> get copyWith =>
+      __$$_AuthorBookCopyWithImpl<_$_AuthorBook>(this, _$identity);
 }
 
-abstract class _Author implements Author {
-  const factory _Author(
+abstract class _AuthorBook implements AuthorBook {
+  const factory _AuthorBook(
       {required final String name,
-      required final List<Book> books}) = _$_Author;
+      required final List<Book> books,
+      final String? imageUrl}) = _$_AuthorBook;
 
   @override
   String get name;
   @override
   List<Book> get books;
   @override
+  String? get imageUrl;
+  @override
   @JsonKey(ignore: true)
-  _$$_AuthorCopyWith<_$_Author> get copyWith =>
+  _$$_AuthorBookCopyWith<_$_AuthorBook> get copyWith =>
       throw _privateConstructorUsedError;
 }
