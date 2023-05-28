@@ -21,6 +21,9 @@ RaffleData _$RaffleDataFromJson(Map<String, dynamic> json) => RaffleData(
       winner: json['winner'] == null
           ? null
           : UserData.fromJson(json['winner'] as Map<String, dynamic>),
+      confirmDate: json['confirmDate'] == null
+          ? null
+          : DateTime.parse(json['confirmDate'] as String),
     );
 
 Map<String, dynamic> _$RaffleDataToJson(RaffleData instance) =>
@@ -30,6 +33,7 @@ Map<String, dynamic> _$RaffleDataToJson(RaffleData instance) =>
       'toRaffle': instance.toRaffle.toIso8601String(),
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
+      'confirmDate': instance.confirmDate?.toIso8601String(),
       'toSend': instance.toSend,
       'winner': instance.winner,
       'participants': instance.participants,

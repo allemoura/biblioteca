@@ -12,5 +12,6 @@ abstract class User with _$User {
     required Library library,
     required List<Raffle> raffles,
     String? password,
+    String? imageProfile,
   }) = _User;
 }
