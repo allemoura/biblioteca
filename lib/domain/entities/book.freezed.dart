@@ -19,6 +19,7 @@ mixin _$Book {
   String get title => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   DateTime get releaseDate => throw _privateConstructorUsedError;
+  List<BookReview> get reviews => throw _privateConstructorUsedError;
   String? get isbn10 => throw _privateConstructorUsedError;
   String? get isbn13 => throw _privateConstructorUsedError;
   String? get cover => throw _privateConstructorUsedError;
@@ -36,6 +37,7 @@ abstract class $BookCopyWith<$Res> {
       {String title,
       String author,
       DateTime releaseDate,
+      List<BookReview> reviews,
       String? isbn10,
       String? isbn13,
       String? cover});
@@ -57,6 +59,7 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
     Object? title = null,
     Object? author = null,
     Object? releaseDate = null,
+    Object? reviews = null,
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
     Object? cover = freezed,
@@ -74,6 +77,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<BookReview>,
       isbn10: freezed == isbn10
           ? _value.isbn10
           : isbn10 // ignore: cast_nullable_to_non_nullable
@@ -100,6 +107,7 @@ abstract class _$$_BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       {String title,
       String author,
       DateTime releaseDate,
+      List<BookReview> reviews,
       String? isbn10,
       String? isbn13,
       String? cover});
@@ -117,6 +125,7 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
     Object? title = null,
     Object? author = null,
     Object? releaseDate = null,
+    Object? reviews = null,
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
     Object? cover = freezed,
@@ -134,6 +143,10 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      reviews: null == reviews
+          ? _value._reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<BookReview>,
       isbn10: freezed == isbn10
           ? _value.isbn10
           : isbn10 // ignore: cast_nullable_to_non_nullable
@@ -157,9 +170,11 @@ class _$_Book implements _Book {
       {required this.title,
       required this.author,
       required this.releaseDate,
+      required final List<BookReview> reviews,
       this.isbn10,
       this.isbn13,
-      this.cover});
+      this.cover})
+      : _reviews = reviews;
 
   @override
   final String title;
@@ -167,6 +182,14 @@ class _$_Book implements _Book {
   final String author;
   @override
   final DateTime releaseDate;
+  final List<BookReview> _reviews;
+  @override
+  List<BookReview> get reviews {
+    if (_reviews is EqualUnmodifiableListView) return _reviews;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reviews);
+  }
+
   @override
   final String? isbn10;
   @override
@@ -176,7 +199,7 @@ class _$_Book implements _Book {
 
   @override
   String toString() {
-    return 'Book(title: $title, author: $author, releaseDate: $releaseDate, isbn10: $isbn10, isbn13: $isbn13, cover: $cover)';
+    return 'Book(title: $title, author: $author, releaseDate: $releaseDate, reviews: $reviews, isbn10: $isbn10, isbn13: $isbn13, cover: $cover)';
   }
 
   @override
@@ -188,14 +211,15 @@ class _$_Book implements _Book {
             (identical(other.author, author) || other.author == author) &&
             (identical(other.releaseDate, releaseDate) ||
                 other.releaseDate == releaseDate) &&
+            const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             (identical(other.isbn10, isbn10) || other.isbn10 == isbn10) &&
             (identical(other.isbn13, isbn13) || other.isbn13 == isbn13) &&
             (identical(other.cover, cover) || other.cover == cover));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, author, releaseDate, isbn10, isbn13, cover);
+  int get hashCode => Object.hash(runtimeType, title, author, releaseDate,
+      const DeepCollectionEquality().hash(_reviews), isbn10, isbn13, cover);
 
   @JsonKey(ignore: true)
   @override
@@ -209,6 +233,7 @@ abstract class _Book implements Book {
       {required final String title,
       required final String author,
       required final DateTime releaseDate,
+      required final List<BookReview> reviews,
       final String? isbn10,
       final String? isbn13,
       final String? cover}) = _$_Book;
@@ -219,6 +244,8 @@ abstract class _Book implements Book {
   String get author;
   @override
   DateTime get releaseDate;
+  @override
+  List<BookReview> get reviews;
   @override
   String? get isbn10;
   @override

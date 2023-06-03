@@ -1,4 +1,5 @@
 import 'package:biblioteca/domain/entities/book.dart';
+import 'package:biblioteca/infra/models/book_review_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'book_data.g.dart';
@@ -11,16 +12,19 @@ class BookData {
   final String? isbn10;
   final String? isbn13;
   final String? cover;
+  final List<BookReviewData> reviews;
 
   BookData(
       {required this.title,
       required this.author,
       required this.releaseDate,
+      required this.reviews,
       this.isbn10,
       this.isbn13,
       this.cover});
 
   factory BookData.fromEntity(Book entity) => BookData(
+      reviews: entity.reviews.map((e) => BookReviewData.fromEntity(e)).toList(),
       title: entity.title,
       author: entity.author,
       releaseDate: entity.releaseDate,
@@ -34,7 +38,8 @@ class BookData {
       releaseDate: releaseDate,
       isbn10: isbn10,
       isbn13: isbn13,
-      cover: cover);
+      cover: cover,
+      reviews: reviews.map((e) => e.toEntity()).toList());
 
   factory BookData.fromJson(Map<String, dynamic> json) =>
       _$BookDataFromJson(json);
