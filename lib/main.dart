@@ -1,4 +1,4 @@
-import 'package:biblioteca/app/pages/main_page.dart';
+import 'package:biblioteca/app/pages/initial_page.dart';
 import 'package:biblioteca/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Biblioteca',
       theme: CustomThemes.lightTheme,
-      home: const MainPage(),
+      home: const InitialPage(),
     );
   }
 }
