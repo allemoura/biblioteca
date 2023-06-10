@@ -39,6 +39,24 @@ class RaffleModel extends Model {
     return raffles;
   }
 
+  Future<List<Raffle>> getAllRafflesFilterByParticipants(String userId) async {
+    final result = await _firestore
+        .collection("raffles")
+        .where("participants", arrayContains: userId)
+        .get();
+
+    final data = result.docs.map((e) => e.data()).toList();
+
+    List<Raffle> raffles = [];
+
+    for (final raffleData in data) {
+      final raffle = RaffleData.fromJson(raffleData).toEntity();
+
+      raffles.add(await convertRaffle(raffle, raffleData));
+    }
+    return raffles;
+  }
+
   Future<List<Raffle>> getAllRafflesActive() async {
     final result = await _firestore.collection("raffles").get();
 

@@ -43,7 +43,9 @@ class _MyRafflesPageState extends State<MyRafflesPage> {
               )
             : ListView(
                 children: store.raffles
-                    .map((raffle) => RaffleCard(raffle: raffle))
+                    .map((raffle) => Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child:RaffleCard(raffle: raffle)))
                     .toList(),
               ),
       ),
