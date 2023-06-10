@@ -1,5 +1,6 @@
 import 'package:biblioteca/app/utils/extensions/datetime_extension.dart';
 import 'package:biblioteca/app/widgets/custom_buttom.dart';
+import 'package:biblioteca/app/widgets/custom_card.dart';
 import 'package:biblioteca/app/widgets/custom_text.dart';
 import 'package:biblioteca/domain/entities/raffle.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +11,8 @@ class RaffleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 10,
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        decoration: BoxDecoration(
-            boxShadow: const [BoxShadow()],
-            borderRadius: BorderRadius.circular(20),
-            color: Theme.of(context).colorScheme.primaryContainer),
-        height: 155,
-        width: MediaQuery.of(context).size.width * 0.95,
+    return CustomCard(
+      content: SizedBox(
         child: Row(
           children: [
             const SizedBox(width: 22),
