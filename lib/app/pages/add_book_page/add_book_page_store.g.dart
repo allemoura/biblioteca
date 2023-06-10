@@ -40,11 +40,28 @@ mixin _$AddBookPageStore on AddBookPageBase, Store {
     });
   }
 
+  late final _$bookReviewAtom =
+      Atom(name: 'AddBookPageBase.bookReview', context: context);
+
+  @override
+  BookReview? get bookReview {
+    _$bookReviewAtom.reportRead();
+    return super.bookReview;
+  }
+
+  @override
+  set bookReview(BookReview? value) {
+    _$bookReviewAtom.reportWrite(value, super.bookReview, () {
+      super.bookReview = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 selectedRadio: ${selectedRadio},
-rate: ${rate}
+rate: ${rate},
+bookReview: ${bookReview}
     ''';
   }
 }

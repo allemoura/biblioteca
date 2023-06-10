@@ -5,7 +5,6 @@ import 'package:biblioteca/app/pages/add_book_page/widgets/custom_top.dart';
 import 'package:biblioteca/app/pages/add_book_page/widgets/options_library.dart';
 import 'package:biblioteca/app/pages/add_book_page/widgets/review_book.dart';
 import 'package:biblioteca/app/widgets/custom_buttom.dart';
-import 'package:biblioteca/app/widgets/custom_text.dart';
 import 'package:biblioteca/domain/entities/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -25,6 +24,7 @@ class _AddBookPageState extends State<AddBookPage> {
 
   @override
   void initState() {
+    store.init(context, widget.book.reviews);
     if (widget.isRead != null) {
       if (widget.isRead!) {
         store.selectedRadio = "Lido";

@@ -6,7 +6,7 @@ class ReviewBook extends StatelessWidget {
   final double rate;
   final Function(double) setRate;
   final TextEditingController reviewController;
-  
+
   const ReviewBook(
       {super.key,
       required this.rate,
@@ -48,6 +48,7 @@ class ReviewBook extends StatelessWidget {
             border: Border.all(color: Theme.of(context).primaryColor),
             borderRadius: BorderRadius.circular(20)),
         child: TextField(
+          maxLines: null,
           controller: reviewController,
           decoration: const InputDecoration.collapsed(
               hintText: "Comente o livro aqui...", border: InputBorder.none),
