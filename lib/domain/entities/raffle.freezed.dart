@@ -21,6 +21,8 @@ mixin _$Raffle {
   DateTime get toRaffle => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   bool get toSend => throw _privateConstructorUsedError;
+  DateTime? get confirmDate => throw _privateConstructorUsedError;
+  User? get winner => throw _privateConstructorUsedError;
   List<User> get participants => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -39,10 +41,13 @@ abstract class $RaffleCopyWith<$Res> {
       DateTime toRaffle,
       DateTime createdAt,
       bool toSend,
+      DateTime? confirmDate,
+      User? winner,
       List<User> participants,
       DateTime? updatedAt});
 
   $BookCopyWith<$Res> get book;
+  $UserCopyWith<$Res>? get winner;
 }
 
 /// @nodoc
@@ -63,6 +68,8 @@ class _$RaffleCopyWithImpl<$Res, $Val extends Raffle>
     Object? toRaffle = null,
     Object? createdAt = null,
     Object? toSend = null,
+    Object? confirmDate = freezed,
+    Object? winner = freezed,
     Object? participants = null,
     Object? updatedAt = freezed,
   }) {
@@ -87,6 +94,14 @@ class _$RaffleCopyWithImpl<$Res, $Val extends Raffle>
           ? _value.toSend
           : toSend // ignore: cast_nullable_to_non_nullable
               as bool,
+      confirmDate: freezed == confirmDate
+          ? _value.confirmDate
+          : confirmDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      winner: freezed == winner
+          ? _value.winner
+          : winner // ignore: cast_nullable_to_non_nullable
+              as User?,
       participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -105,6 +120,18 @@ class _$RaffleCopyWithImpl<$Res, $Val extends Raffle>
       return _then(_value.copyWith(book: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get winner {
+    if (_value.winner == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.winner!, (value) {
+      return _then(_value.copyWith(winner: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -119,11 +146,15 @@ abstract class _$$_RaffleCopyWith<$Res> implements $RaffleCopyWith<$Res> {
       DateTime toRaffle,
       DateTime createdAt,
       bool toSend,
+      DateTime? confirmDate,
+      User? winner,
       List<User> participants,
       DateTime? updatedAt});
 
   @override
   $BookCopyWith<$Res> get book;
+  @override
+  $UserCopyWith<$Res>? get winner;
 }
 
 /// @nodoc
@@ -141,6 +172,8 @@ class __$$_RaffleCopyWithImpl<$Res>
     Object? toRaffle = null,
     Object? createdAt = null,
     Object? toSend = null,
+    Object? confirmDate = freezed,
+    Object? winner = freezed,
     Object? participants = null,
     Object? updatedAt = freezed,
   }) {
@@ -165,6 +198,14 @@ class __$$_RaffleCopyWithImpl<$Res>
           ? _value.toSend
           : toSend // ignore: cast_nullable_to_non_nullable
               as bool,
+      confirmDate: freezed == confirmDate
+          ? _value.confirmDate
+          : confirmDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      winner: freezed == winner
+          ? _value.winner
+          : winner // ignore: cast_nullable_to_non_nullable
+              as User?,
       participants: null == participants
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -186,6 +227,8 @@ class _$_Raffle implements _Raffle {
       required this.toRaffle,
       required this.createdAt,
       required this.toSend,
+      this.confirmDate,
+      this.winner,
       required final List<User> participants,
       this.updatedAt})
       : _participants = participants;
@@ -200,6 +243,10 @@ class _$_Raffle implements _Raffle {
   final DateTime createdAt;
   @override
   final bool toSend;
+  @override
+  final DateTime? confirmDate;
+  @override
+  final User? winner;
   final List<User> _participants;
   @override
   List<User> get participants {
@@ -213,7 +260,7 @@ class _$_Raffle implements _Raffle {
 
   @override
   String toString() {
-    return 'Raffle(book: $book, cep: $cep, toRaffle: $toRaffle, createdAt: $createdAt, toSend: $toSend, participants: $participants, updatedAt: $updatedAt)';
+    return 'Raffle(book: $book, cep: $cep, toRaffle: $toRaffle, createdAt: $createdAt, toSend: $toSend, confirmDate: $confirmDate, winner: $winner, participants: $participants, updatedAt: $updatedAt)';
   }
 
   @override
@@ -228,6 +275,9 @@ class _$_Raffle implements _Raffle {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.toSend, toSend) || other.toSend == toSend) &&
+            (identical(other.confirmDate, confirmDate) ||
+                other.confirmDate == confirmDate) &&
+            (identical(other.winner, winner) || other.winner == winner) &&
             const DeepCollectionEquality()
                 .equals(other._participants, _participants) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -235,8 +285,17 @@ class _$_Raffle implements _Raffle {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, book, cep, toRaffle, createdAt,
-      toSend, const DeepCollectionEquality().hash(_participants), updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      book,
+      cep,
+      toRaffle,
+      createdAt,
+      toSend,
+      confirmDate,
+      winner,
+      const DeepCollectionEquality().hash(_participants),
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -252,6 +311,8 @@ abstract class _Raffle implements Raffle {
       required final DateTime toRaffle,
       required final DateTime createdAt,
       required final bool toSend,
+      final DateTime? confirmDate,
+      final User? winner,
       required final List<User> participants,
       final DateTime? updatedAt}) = _$_Raffle;
 
@@ -265,6 +326,10 @@ abstract class _Raffle implements Raffle {
   DateTime get createdAt;
   @override
   bool get toSend;
+  @override
+  DateTime? get confirmDate;
+  @override
+  User? get winner;
   @override
   List<User> get participants;
   @override

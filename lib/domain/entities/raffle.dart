@@ -12,6 +12,8 @@ abstract class Raffle with _$Raffle {
       required DateTime toRaffle,
       required DateTime createdAt,
       required bool toSend,
+      DateTime? confirmDate,
+      User? winner,
       required List<User> participants,
       DateTime? updatedAt}) = _Raffle;
 }
