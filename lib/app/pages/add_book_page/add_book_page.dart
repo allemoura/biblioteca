@@ -11,8 +11,9 @@ import 'package:rate/rate.dart';
 
 class AddBookPage extends StatefulWidget {
   final Book book;
+  final bool? isRead;
 
-  const AddBookPage({super.key, required this.book});
+  const AddBookPage({super.key, required this.book, this.isRead});
 
   @override
   State<AddBookPage> createState() => _AddBookPageState();
@@ -21,7 +22,18 @@ class AddBookPage extends StatefulWidget {
 class _AddBookPageState extends State<AddBookPage> {
   String? selectedRadio;
   double rate = 0;
-  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.isRead != null) {
+      if (widget.isRead!) {
+        selectedRadio = "Lido";
+      } else {
+        selectedRadio = "Quero ler";
+      }
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +83,7 @@ class _AddBookPageState extends State<AddBookPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
-                          Rate(
+                          const Rate(
                             iconSize: 25,
                             initialValue: 0,
                             readOnly: true,
@@ -165,7 +177,7 @@ class _AddBookPageState extends State<AddBookPage> {
                   title: "Adicionar",
                   onTap: () async {
                     Book book = widget.book;
-                    if (reviewController.text.isEmpty) {
+                    if (reviewController.text.isNotEmpty) {
                       BookReview bookReview = BookReview(
                           author: UserModel.of(context).userData!.toEntity(),
                           stars: rate,
@@ -176,10 +188,14 @@ class _AddBookPageState extends State<AddBookPage> {
                       book = book.copyWith(reviews: reviwes);
                     }
                     if (!await bookModel.contaisBook(widget.book.id!)) {
-                      await bookModel
-                          .addNewBook(book)
-                          .then((value) => Navigator.pop(context));
+                      await bookModel.addNewBook(book);
                     }
+                    if (selectedRadio == "Quero ler") {
+                      UserModel.of(context).addNewBookToRead(book);
+                    } else {
+                      UserModel.of(context).addNewBookRead(book);
+                    }
+                    Navigator.pop(context);
                   },
                 )
               ],

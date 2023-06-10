@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:biblioteca/domain/entities/book.dart';
 import 'package:biblioteca/infra/models/book_review_data.dart';
 import 'package:biblioteca/infra/utils/server_timestamp_converter.dart';
@@ -19,7 +17,7 @@ class BookData {
   final String? isbn10;
   final String? isbn13;
   final String? cover;
-  
+
   @JsonKey(includeToJson: true)
   final List<BookReviewData> reviews;
 

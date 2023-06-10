@@ -1,5 +1,7 @@
 // ignore_for_file: unused_field
 
+import 'package:biblioteca/domain/entities/book.dart';
+import 'package:biblioteca/domain/entities/library.dart';
 import 'package:biblioteca/infra/models/library_data.dart';
 import 'package:biblioteca/infra/models/user_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -147,21 +149,18 @@ class UserModel extends Model {
     }
   }
 
-  Future<void> updateUser(
-      {required UserData userData,
-      required VoidCallback onSuccess,
-      required VoidCallback onFail}) async {
+  Future<void> updateUser({
+    required UserData userData,
+  }) async {
     isLoding = true;
     notifyListeners();
 
     try {
       await _saveUserData(userData);
 
-      onSuccess();
       isLoding = false;
       notifyListeners();
     } catch (e) {
-      onFail();
       isLoding = false;
       notifyListeners();
     }
@@ -219,5 +218,49 @@ class UserModel extends Model {
 
       return false;
     }
+  }
+
+  Future<void> addNewBookRead(Book book) async {
+    Library library = userData!.library.toEntity();
+    List<Book> reads = [];
+    reads.addAll(library.reads);
+    reads.add(book);
+    library = library.copyWith(reads: reads);
+    await updateUser(
+        userData: UserData.fromEntity(
+            userData!.toEntity().copyWith(library: library)));
+  }
+
+  Future<void> addNewBookToRead(Book book) async {
+    Library library = userData!.library.toEntity();
+    List<Book> toRead = [];
+    toRead.addAll(library.toRead);
+    toRead.add(book);
+    library = library.copyWith(toRead: toRead);
+    await updateUser(
+        userData: UserData.fromEntity(
+            userData!.toEntity().copyWith(library: library)));
+  }
+
+  Future<void> addNewBookDonated(Book book) async {
+    Library library = userData!.library.toEntity();
+    List<Book> donateds = [];
+    donateds.addAll(library.donateds);
+    donateds.add(book);
+    library = library.copyWith(donateds: donateds);
+    await updateUser(
+        userData: UserData.fromEntity(
+            userData!.toEntity().copyWith(library: library)));
+  }
+
+  Future<void> addNewBookExchanged(Book book) async {
+    Library library = userData!.library.toEntity();
+    List<Book> exchangeds = [];
+    exchangeds.addAll(library.exchangeds);
+    exchangeds.add(book);
+    library = library.copyWith(exchangeds: exchangeds);
+    await updateUser(
+        userData: UserData.fromEntity(
+            userData!.toEntity().copyWith(library: library)));
   }
 }

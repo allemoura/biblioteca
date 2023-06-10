@@ -43,4 +43,10 @@ class BookModel extends Model {
 
     return UserData.fromJson(resultBook.data()!).toEntity();
   }
+
+  Future<BookData> getBookById(String? bookId) async {
+    final resultBook = await _firestore.collection("books").doc(bookId).get();
+
+    return BookData.fromJson(resultBook.data()!);
+  }
 }
