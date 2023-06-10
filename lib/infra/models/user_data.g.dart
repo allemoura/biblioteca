@@ -14,12 +14,14 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
           .map((e) => RaffleData.fromJson(e as Map<String, dynamic>))
           .toList(),
       password: json['password'] as String?,
+      imageProfile: json['imageProfile'] as String?,
     );
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'name': instance.name,
       'email': instance.email,
       'password': instance.password,
+      'imageProfile': instance.imageProfile,
       'library': instance.library,
       'raffles': instance.raffles,
     };

@@ -21,6 +21,7 @@ mixin _$User {
   Library get library => throw _privateConstructorUsedError;
   List<Raffle> get raffles => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
+  String? get imageProfile => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ abstract class $UserCopyWith<$Res> {
       String email,
       Library library,
       List<Raffle> raffles,
-      String? password});
+      String? password,
+      String? imageProfile});
 
   $LibraryCopyWith<$Res> get library;
 }
@@ -59,6 +61,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? library = null,
     Object? raffles = null,
     Object? password = freezed,
+    Object? imageProfile = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -80,6 +83,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageProfile: freezed == imageProfile
+          ? _value.imageProfile
+          : imageProfile // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -104,7 +111,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String email,
       Library library,
       List<Raffle> raffles,
-      String? password});
+      String? password,
+      String? imageProfile});
 
   @override
   $LibraryCopyWith<$Res> get library;
@@ -124,6 +132,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? library = null,
     Object? raffles = null,
     Object? password = freezed,
+    Object? imageProfile = freezed,
   }) {
     return _then(_$_User(
       name: null == name
@@ -146,6 +155,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
+      imageProfile: freezed == imageProfile
+          ? _value.imageProfile
+          : imageProfile // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -158,7 +171,8 @@ class _$_User implements _User {
       required this.email,
       required this.library,
       required final List<Raffle> raffles,
-      this.password})
+      this.password,
+      this.imageProfile})
       : _raffles = raffles;
 
   @override
@@ -177,10 +191,12 @@ class _$_User implements _User {
 
   @override
   final String? password;
+  @override
+  final String? imageProfile;
 
   @override
   String toString() {
-    return 'User(name: $name, email: $email, library: $library, raffles: $raffles, password: $password)';
+    return 'User(name: $name, email: $email, library: $library, raffles: $raffles, password: $password, imageProfile: $imageProfile)';
   }
 
   @override
@@ -193,12 +209,14 @@ class _$_User implements _User {
             (identical(other.library, library) || other.library == library) &&
             const DeepCollectionEquality().equals(other._raffles, _raffles) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.imageProfile, imageProfile) ||
+                other.imageProfile == imageProfile));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, name, email, library,
-      const DeepCollectionEquality().hash(_raffles), password);
+      const DeepCollectionEquality().hash(_raffles), password, imageProfile);
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +231,8 @@ abstract class _User implements User {
       required final String email,
       required final Library library,
       required final List<Raffle> raffles,
-      final String? password}) = _$_User;
+      final String? password,
+      final String? imageProfile}) = _$_User;
 
   @override
   String get name;
@@ -225,6 +244,8 @@ abstract class _User implements User {
   List<Raffle> get raffles;
   @override
   String? get password;
+  @override
+  String? get imageProfile;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

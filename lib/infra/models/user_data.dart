@@ -10,6 +10,7 @@ class UserData {
   final String name;
   final String email;
   final String? password;
+  final String? imageProfile;
   final LibraryData library;
   final List<RaffleData> raffles;
 
@@ -18,11 +19,13 @@ class UserData {
       required this.email,
       required this.library,
       required this.raffles,
-      this.password});
+      this.password,
+      this.imageProfile});
 
   factory UserData.fromEntity(User entity) => UserData(
       name: entity.name,
       email: entity.email,
+      imageProfile: entity.imageProfile,
       library: LibraryData.fromEntity(entity.library),
       raffles: entity.raffles.map((e) => RaffleData.fromEntity(e)).toList(),
       password: entity.password);
@@ -30,6 +33,7 @@ class UserData {
   User toEntity() => User(
       name: name,
       email: email,
+      imageProfile: imageProfile,
       library: library.toEntity(),
       raffles: raffles.map((e) => e.toEntity()).toList(),
       password: password);
