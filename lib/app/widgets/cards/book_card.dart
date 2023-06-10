@@ -4,6 +4,7 @@ import 'package:biblioteca/app/widgets/custom_buttom.dart';
 import 'package:biblioteca/app/widgets/custom_card.dart';
 import 'package:biblioteca/app/widgets/custom_text.dart';
 import 'package:biblioteca/domain/entities/book.dart';
+import 'package:biblioteca/infra/repositories/user_model.dart';
 import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
@@ -12,6 +13,10 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final library = UserModel.of(context).userData!.library.toEntity();
+    final haveBook = verifiedContainsBook(library.reads, book) ||
+        verifiedContainsBook(library.toRead, book);
+
     return CustomCard(
       height: 220,
       content: SizedBox(
@@ -51,19 +56,21 @@ class BookCard extends StatelessWidget {
                     CustomText(
                       value: "ISBN-13: ${book.isbn13}",
                     ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 15),
-                    child: CustomButton(
-                      width: 200,
-                      title: "Adicionar a biblíoteca",
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddBookPage(book: book)));
-                      },
-                    ),
-                  )
+                  if (!haveBook)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50, top: 15),
+                      child: CustomButton(
+                        width: 200,
+                        title: "Adicionar a biblíoteca",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddBookPage(book: book)));
+                        },
+                      ),
+                    )
                 ],
               ),
             ),
@@ -71,5 +78,17 @@ class BookCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool verifiedContainsBook(List<Book> books, Book book) {
+    bool contains = false;
+
+    for (final bookToVerified in books) {
+      if (bookToVerified.id == book.id) {
+        contains = true;
+        break;
+      }
+    }
+    return contains;
   }
 }
