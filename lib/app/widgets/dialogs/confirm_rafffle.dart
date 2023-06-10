@@ -37,7 +37,7 @@ class ConfirmRaffle extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: 180,
+                    width: 200,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

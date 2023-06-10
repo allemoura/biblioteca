@@ -21,7 +21,8 @@ class BookDetails extends StatelessWidget {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Image.network(
           book.cover!,
-          height: 80,
+          height: 160,
+          width: 110,
         ),
         const SizedBox(height: 10),
         const Rate(

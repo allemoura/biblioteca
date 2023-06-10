@@ -32,7 +32,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
-      onTap: onTap,
+      onTap: enable ? onTap : null,
       child: Container(
         height: height ?? 40,
         width: width ?? 120,

@@ -89,7 +89,7 @@ class RaffleModel extends Model {
     }
     return raffle.copyWith(
         book: await getBook(raffleData["book"]),
-        createdBy: await getUser(raffleData["cretedBy"]),
+        createdBy: await getUser(raffleData["createdBy"]),
         winner: raffleData.containsKey("winner")
             ? await getUser(raffleData["winner"])
             : null,
