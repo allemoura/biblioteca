@@ -6,10 +6,10 @@ part 'library_data.g.dart';
 
 @JsonSerializable()
 class LibraryData {
-  final List<BookData> reads;
-  final List<BookData> toRead;
-  final List<BookData> exchangeds;
-  final List<BookData> donateds;
+  final List<BookData>? reads;
+  final List<BookData>? toRead;
+  final List<BookData>? exchangeds;
+  final List<BookData>? donateds;
 
   LibraryData(
       {required this.reads,
@@ -23,10 +23,13 @@ class LibraryData {
       donateds: entity.donateds.map((e) => BookData.fromEntity(e)).toList());
 
   Library toEntity() => Library(
-      reads: reads.map((e) => e.toEntity()).toList(),
-      toRead: toRead.map((e) => e.toEntity()).toList(),
-      exchangeds: exchangeds.map((e) => e.toEntity()).toList(),
-      donateds: donateds.map((e) => e.toEntity()).toList());
+      reads: reads == null ? [] : reads!.map((e) => e.toEntity()).toList(),
+      toRead: toRead == null ? [] : toRead!.map((e) => e.toEntity()).toList(),
+      exchangeds: exchangeds == null
+          ? []
+          : exchangeds!.map((e) => e.toEntity()).toList(),
+      donateds:
+          donateds == null ? [] : donateds!.map((e) => e.toEntity()).toList());
 
   factory LibraryData.fromJson(Map<String, dynamic> json) =>
       _$LibraryDataFromJson(json);

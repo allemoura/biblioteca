@@ -7,34 +7,26 @@ part of 'raffle_data.dart';
 // **************************************************************************
 
 RaffleData _$RaffleDataFromJson(Map<String, dynamic> json) => RaffleData(
-      book: BookData.fromJson(json['book'] as Map<String, dynamic>),
       cep: json['cep'] as String,
-      toRaffle: DateTime.parse(json['toRaffle'] as String),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      toRaffle: const ServerTimestampConverter()
+          .fromJson(json['toRaffle'] as Timestamp),
+      createdAt: const ServerTimestampConverter()
+          .fromJson(json['createdAt'] as Timestamp),
+      updatedAt:
+          const TimestampConverter().fromJson(json['updatedAt'] as Timestamp?),
       toSend: json['toSend'] as bool,
-      participants: (json['participants'] as List<dynamic>)
-          .map((e) => UserData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      winner: json['winner'] == null
-          ? null
-          : UserData.fromJson(json['winner'] as Map<String, dynamic>),
-      confirmDate: json['confirmDate'] == null
-          ? null
-          : DateTime.parse(json['confirmDate'] as String),
+      id: json['id'] as String?,
+      confirmDate: const TimestampConverter()
+          .fromJson(json['confirmDate'] as Timestamp?),
     );
 
 Map<String, dynamic> _$RaffleDataToJson(RaffleData instance) =>
     <String, dynamic>{
-      'book': instance.book,
       'cep': instance.cep,
-      'toRaffle': instance.toRaffle.toIso8601String(),
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
-      'confirmDate': instance.confirmDate?.toIso8601String(),
+      'toRaffle': const ServerTimestampConverter().toJson(instance.toRaffle),
+      'createdAt': const ServerTimestampConverter().toJson(instance.createdAt),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
+      'confirmDate': const TimestampConverter().toJson(instance.confirmDate),
       'toSend': instance.toSend,
-      'winner': instance.winner,
-      'participants': instance.participants,
+      'id': instance.id,
     };

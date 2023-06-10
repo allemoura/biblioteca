@@ -11,7 +11,12 @@ class UserData {
   final String email;
   final String? password;
   final String? imageProfile;
+  final String? id;
+
+  @JsonKey(includeToJson: false)
   final LibraryData library;
+
+  @JsonKey(includeToJson: false)
   final List<RaffleData> raffles;
 
   UserData(
@@ -20,10 +25,12 @@ class UserData {
       required this.library,
       required this.raffles,
       this.password,
-      this.imageProfile});
+      this.imageProfile,
+      this.id});
 
   factory UserData.fromEntity(User entity) => UserData(
       name: entity.name,
+      id: entity.id,
       email: entity.email,
       imageProfile: entity.imageProfile,
       library: LibraryData.fromEntity(entity.library),
@@ -33,6 +40,7 @@ class UserData {
   User toEntity() => User(
       name: name,
       email: email,
+      id: id,
       imageProfile: imageProfile,
       library: library.toEntity(),
       raffles: raffles.map((e) => e.toEntity()).toList(),

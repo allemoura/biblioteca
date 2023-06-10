@@ -6,7 +6,7 @@ part 'book_review.freezed.dart';
 @freezed
 abstract class BookReview with _$BookReview {
   const factory BookReview({
-    required User author,
+    User? author,
     required double stars,
     required DateTime createdAt,
     DateTime? updatedAt,

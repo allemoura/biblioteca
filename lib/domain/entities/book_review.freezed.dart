@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BookReview {
-  User get author => throw _privateConstructorUsedError;
+  User? get author => throw _privateConstructorUsedError;
   double get stars => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
@@ -34,13 +34,13 @@ abstract class $BookReviewCopyWith<$Res> {
       _$BookReviewCopyWithImpl<$Res, BookReview>;
   @useResult
   $Res call(
-      {User author,
+      {User? author,
       double stars,
       DateTime createdAt,
       DateTime? updatedAt,
       String? review});
 
-  $UserCopyWith<$Res> get author;
+  $UserCopyWith<$Res>? get author;
 }
 
 /// @nodoc
@@ -56,17 +56,17 @@ class _$BookReviewCopyWithImpl<$Res, $Val extends BookReview>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? author = null,
+    Object? author = freezed,
     Object? stars = null,
     Object? createdAt = null,
     Object? updatedAt = freezed,
     Object? review = freezed,
   }) {
     return _then(_value.copyWith(
-      author: null == author
+      author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
       stars: null == stars
           ? _value.stars
           : stars // ignore: cast_nullable_to_non_nullable
@@ -88,8 +88,12 @@ class _$BookReviewCopyWithImpl<$Res, $Val extends BookReview>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get author {
-    return $UserCopyWith<$Res>(_value.author, (value) {
+  $UserCopyWith<$Res>? get author {
+    if (_value.author == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.author!, (value) {
       return _then(_value.copyWith(author: value) as $Val);
     });
   }
@@ -104,14 +108,14 @@ abstract class _$$_BookReviewCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {User author,
+      {User? author,
       double stars,
       DateTime createdAt,
       DateTime? updatedAt,
       String? review});
 
   @override
-  $UserCopyWith<$Res> get author;
+  $UserCopyWith<$Res>? get author;
 }
 
 /// @nodoc
@@ -125,17 +129,17 @@ class __$$_BookReviewCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? author = null,
+    Object? author = freezed,
     Object? stars = null,
     Object? createdAt = null,
     Object? updatedAt = freezed,
     Object? review = freezed,
   }) {
     return _then(_$_BookReview(
-      author: null == author
+      author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
       stars: null == stars
           ? _value.stars
           : stars // ignore: cast_nullable_to_non_nullable
@@ -160,14 +164,14 @@ class __$$_BookReviewCopyWithImpl<$Res>
 
 class _$_BookReview implements _BookReview {
   const _$_BookReview(
-      {required this.author,
+      {this.author,
       required this.stars,
       required this.createdAt,
       this.updatedAt,
       this.review});
 
   @override
-  final User author;
+  final User? author;
   @override
   final double stars;
   @override
@@ -209,14 +213,14 @@ class _$_BookReview implements _BookReview {
 
 abstract class _BookReview implements BookReview {
   const factory _BookReview(
-      {required final User author,
+      {final User? author,
       required final double stars,
       required final DateTime createdAt,
       final DateTime? updatedAt,
       final String? review}) = _$_BookReview;
 
   @override
-  User get author;
+  User? get author;
   @override
   double get stars;
   @override

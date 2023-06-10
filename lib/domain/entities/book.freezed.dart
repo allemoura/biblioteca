@@ -23,6 +23,7 @@ mixin _$Book {
   String? get isbn10 => throw _privateConstructorUsedError;
   String? get isbn13 => throw _privateConstructorUsedError;
   String? get cover => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookCopyWith<Book> get copyWith => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $BookCopyWith<$Res> {
       List<BookReview> reviews,
       String? isbn10,
       String? isbn13,
-      String? cover});
+      String? cover,
+      String? id});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
     Object? cover = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -93,6 +96,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -110,7 +117,8 @@ abstract class _$$_BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       List<BookReview> reviews,
       String? isbn10,
       String? isbn13,
-      String? cover});
+      String? cover,
+      String? id});
 }
 
 /// @nodoc
@@ -129,6 +137,7 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
     Object? cover = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$_Book(
       title: null == title
@@ -159,6 +168,10 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -173,7 +186,8 @@ class _$_Book implements _Book {
       required final List<BookReview> reviews,
       this.isbn10,
       this.isbn13,
-      this.cover})
+      this.cover,
+      this.id})
       : _reviews = reviews;
 
   @override
@@ -196,10 +210,12 @@ class _$_Book implements _Book {
   final String? isbn13;
   @override
   final String? cover;
+  @override
+  final String? id;
 
   @override
   String toString() {
-    return 'Book(title: $title, author: $author, releaseDate: $releaseDate, reviews: $reviews, isbn10: $isbn10, isbn13: $isbn13, cover: $cover)';
+    return 'Book(title: $title, author: $author, releaseDate: $releaseDate, reviews: $reviews, isbn10: $isbn10, isbn13: $isbn13, cover: $cover, id: $id)';
   }
 
   @override
@@ -214,12 +230,13 @@ class _$_Book implements _Book {
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             (identical(other.isbn10, isbn10) || other.isbn10 == isbn10) &&
             (identical(other.isbn13, isbn13) || other.isbn13 == isbn13) &&
-            (identical(other.cover, cover) || other.cover == cover));
+            (identical(other.cover, cover) || other.cover == cover) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, title, author, releaseDate,
-      const DeepCollectionEquality().hash(_reviews), isbn10, isbn13, cover);
+      const DeepCollectionEquality().hash(_reviews), isbn10, isbn13, cover, id);
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +253,8 @@ abstract class _Book implements Book {
       required final List<BookReview> reviews,
       final String? isbn10,
       final String? isbn13,
-      final String? cover}) = _$_Book;
+      final String? cover,
+      final String? id}) = _$_Book;
 
   @override
   String get title;
@@ -252,6 +270,8 @@ abstract class _Book implements Book {
   String? get isbn13;
   @override
   String? get cover;
+  @override
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$_BookCopyWith<_$_Book> get copyWith => throw _privateConstructorUsedError;

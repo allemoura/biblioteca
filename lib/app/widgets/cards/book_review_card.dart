@@ -23,14 +23,14 @@ class BookReviwCard extends StatelessWidget {
                 const SizedBox(width: 10),
                 Center(
                     child: CustomCircularImage(
-                        imageUrl: bookReview.author.imageProfile)),
+                        imageUrl: bookReview.author!.imageProfile)),
                 const SizedBox(width: 20),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      value: bookReview.author.name,
+                      value: bookReview.author!.name,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
