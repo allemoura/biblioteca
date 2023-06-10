@@ -34,7 +34,7 @@ class RaffleView extends StatelessWidget {
         const SizedBox(height: 5),
         CustomButton(
           enable: (!raffle.participants.contains(currentUser) &&
-              raffle.createdBy != currentUser),
+              raffle.createdBy!.id != currentUser.id),
           width: 140,
           title: "Participar",
           onTap: () {

@@ -24,7 +24,8 @@ class RaffleModel extends Model {
   Future<List<Raffle>> getAllRafflesFilterByUser(String userId) async {
     final result = await _firestore
         .collection("raffles")
-        .where({"createdBy": userId}).get();
+        .where("createdBy", isEqualTo: userId)
+        .get();
 
     final data = result.docs.map((e) => e.data()).toList();
 
