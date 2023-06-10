@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  final bool? isRead;
+  const SearchPage({super.key, this.isRead});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -29,7 +30,7 @@ class _SearchPageState extends State<SearchPage> {
             ...store.books.map(
               (book) => Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: BookCard(book: book),
+                child: BookCard(book: book, isRead: widget.isRead),
               ),
             )
           ],

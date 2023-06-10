@@ -2,7 +2,6 @@ import 'package:biblioteca/app/utils/extensions/datetime_extension.dart';
 import 'package:biblioteca/app/widgets/custom_buttom.dart';
 import 'package:biblioteca/app/widgets/custom_text.dart';
 import 'package:biblioteca/domain/entities/raffle.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmRaffle extends StatelessWidget {

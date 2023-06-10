@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
   final Book book;
-  const BookCard({super.key, required this.book});
+  final bool? isRead;
+  const BookCard({super.key, required this.book, this.isRead});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class BookCard extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      AddBookPage(book: book)));
+                                      AddBookPage(book: book, isRead: isRead)));
                         },
                       ),
                     )

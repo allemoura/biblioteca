@@ -1,5 +1,6 @@
 import 'package:biblioteca/app/pages/library_page/library_page_store.dart';
 import 'package:biblioteca/app/pages/library_page/widgets/book_details.dart';
+import 'package:biblioteca/app/pages/search_page/search_page.dart';
 import 'package:biblioteca/app/widgets/custom_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -32,7 +33,13 @@ class _LibraryPageState extends State<LibraryPage>
       return Scaffold(
         floatingActionButton: (store.index == 0 || store.index == 1)
             ? FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              SearchPage(isRead: store.index == 0)));
+                },
                 child: const Icon(Icons.add, size: 40),
               )
             : null,
