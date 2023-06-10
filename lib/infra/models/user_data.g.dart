@@ -15,6 +15,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
           .toList(),
       password: json['password'] as String?,
       imageProfile: json['imageProfile'] as String?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
@@ -22,6 +23,5 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
       'imageProfile': instance.imageProfile,
-      'library': instance.library,
-      'raffles': instance.raffles,
+      'id': instance.id,
     };

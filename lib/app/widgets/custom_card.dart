@@ -7,7 +7,8 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return Center(
+      child: Material(
         elevation: 10,
         borderRadius: BorderRadius.circular(20),
         child: Container(
@@ -17,6 +18,8 @@ class CustomCard extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primaryContainer),
             height: height ?? 155,
             width: MediaQuery.of(context).size.width * 0.95,
-            child: content));
+            child: content),
+      ),
+    );
   }
 }

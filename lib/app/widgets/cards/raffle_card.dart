@@ -17,7 +17,7 @@ class RaffleCard extends StatelessWidget {
           children: [
             const SizedBox(width: 22),
             Image.network(
-              raffle.book.cover!,
+              raffle.book!.cover!,
               width: 65,
               height: 100,
               fit: BoxFit.fill,
@@ -28,7 +28,7 @@ class RaffleCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 CustomText(
-                  value: raffle.book.title,
+                  value: raffle.book!.title,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),

@@ -7,13 +7,15 @@ part 'raffle.freezed.dart';
 @freezed
 abstract class Raffle with _$Raffle {
   const factory Raffle(
-      {required Book book,
+      {Book? book,
       required String cep,
       required DateTime toRaffle,
       required DateTime createdAt,
       required bool toSend,
       DateTime? confirmDate,
       User? winner,
+      User? createdBy,
+      String? id,
       required List<User> participants,
       DateTime? updatedAt}) = _Raffle;
 }

@@ -16,13 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Raffle {
-  Book get book => throw _privateConstructorUsedError;
+  Book? get book => throw _privateConstructorUsedError;
   String get cep => throw _privateConstructorUsedError;
   DateTime get toRaffle => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   bool get toSend => throw _privateConstructorUsedError;
   DateTime? get confirmDate => throw _privateConstructorUsedError;
   User? get winner => throw _privateConstructorUsedError;
+  User? get createdBy => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   List<User> get participants => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -36,18 +38,21 @@ abstract class $RaffleCopyWith<$Res> {
       _$RaffleCopyWithImpl<$Res, Raffle>;
   @useResult
   $Res call(
-      {Book book,
+      {Book? book,
       String cep,
       DateTime toRaffle,
       DateTime createdAt,
       bool toSend,
       DateTime? confirmDate,
       User? winner,
+      User? createdBy,
+      String? id,
       List<User> participants,
       DateTime? updatedAt});
 
-  $BookCopyWith<$Res> get book;
+  $BookCopyWith<$Res>? get book;
   $UserCopyWith<$Res>? get winner;
+  $UserCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -63,21 +68,23 @@ class _$RaffleCopyWithImpl<$Res, $Val extends Raffle>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = null,
+    Object? book = freezed,
     Object? cep = null,
     Object? toRaffle = null,
     Object? createdAt = null,
     Object? toSend = null,
     Object? confirmDate = freezed,
     Object? winner = freezed,
+    Object? createdBy = freezed,
+    Object? id = freezed,
     Object? participants = null,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      book: null == book
+      book: freezed == book
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
-              as Book,
+              as Book?,
       cep: null == cep
           ? _value.cep
           : cep // ignore: cast_nullable_to_non_nullable
@@ -102,6 +109,14 @@ class _$RaffleCopyWithImpl<$Res, $Val extends Raffle>
           ? _value.winner
           : winner // ignore: cast_nullable_to_non_nullable
               as User?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as User?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -115,8 +130,12 @@ class _$RaffleCopyWithImpl<$Res, $Val extends Raffle>
 
   @override
   @pragma('vm:prefer-inline')
-  $BookCopyWith<$Res> get book {
-    return $BookCopyWith<$Res>(_value.book, (value) {
+  $BookCopyWith<$Res>? get book {
+    if (_value.book == null) {
+      return null;
+    }
+
+    return $BookCopyWith<$Res>(_value.book!, (value) {
       return _then(_value.copyWith(book: value) as $Val);
     });
   }
@@ -132,6 +151,18 @@ class _$RaffleCopyWithImpl<$Res, $Val extends Raffle>
       return _then(_value.copyWith(winner: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get createdBy {
+    if (_value.createdBy == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.createdBy!, (value) {
+      return _then(_value.copyWith(createdBy: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -141,20 +172,24 @@ abstract class _$$_RaffleCopyWith<$Res> implements $RaffleCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Book book,
+      {Book? book,
       String cep,
       DateTime toRaffle,
       DateTime createdAt,
       bool toSend,
       DateTime? confirmDate,
       User? winner,
+      User? createdBy,
+      String? id,
       List<User> participants,
       DateTime? updatedAt});
 
   @override
-  $BookCopyWith<$Res> get book;
+  $BookCopyWith<$Res>? get book;
   @override
   $UserCopyWith<$Res>? get winner;
+  @override
+  $UserCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -167,21 +202,23 @@ class __$$_RaffleCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = null,
+    Object? book = freezed,
     Object? cep = null,
     Object? toRaffle = null,
     Object? createdAt = null,
     Object? toSend = null,
     Object? confirmDate = freezed,
     Object? winner = freezed,
+    Object? createdBy = freezed,
+    Object? id = freezed,
     Object? participants = null,
     Object? updatedAt = freezed,
   }) {
     return _then(_$_Raffle(
-      book: null == book
+      book: freezed == book
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
-              as Book,
+              as Book?,
       cep: null == cep
           ? _value.cep
           : cep // ignore: cast_nullable_to_non_nullable
@@ -206,6 +243,14 @@ class __$$_RaffleCopyWithImpl<$Res>
           ? _value.winner
           : winner // ignore: cast_nullable_to_non_nullable
               as User?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as User?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       participants: null == participants
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -222,19 +267,21 @@ class __$$_RaffleCopyWithImpl<$Res>
 
 class _$_Raffle implements _Raffle {
   const _$_Raffle(
-      {required this.book,
+      {this.book,
       required this.cep,
       required this.toRaffle,
       required this.createdAt,
       required this.toSend,
       this.confirmDate,
       this.winner,
+      this.createdBy,
+      this.id,
       required final List<User> participants,
       this.updatedAt})
       : _participants = participants;
 
   @override
-  final Book book;
+  final Book? book;
   @override
   final String cep;
   @override
@@ -247,6 +294,10 @@ class _$_Raffle implements _Raffle {
   final DateTime? confirmDate;
   @override
   final User? winner;
+  @override
+  final User? createdBy;
+  @override
+  final String? id;
   final List<User> _participants;
   @override
   List<User> get participants {
@@ -260,7 +311,7 @@ class _$_Raffle implements _Raffle {
 
   @override
   String toString() {
-    return 'Raffle(book: $book, cep: $cep, toRaffle: $toRaffle, createdAt: $createdAt, toSend: $toSend, confirmDate: $confirmDate, winner: $winner, participants: $participants, updatedAt: $updatedAt)';
+    return 'Raffle(book: $book, cep: $cep, toRaffle: $toRaffle, createdAt: $createdAt, toSend: $toSend, confirmDate: $confirmDate, winner: $winner, createdBy: $createdBy, id: $id, participants: $participants, updatedAt: $updatedAt)';
   }
 
   @override
@@ -278,6 +329,9 @@ class _$_Raffle implements _Raffle {
             (identical(other.confirmDate, confirmDate) ||
                 other.confirmDate == confirmDate) &&
             (identical(other.winner, winner) || other.winner == winner) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._participants, _participants) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -294,6 +348,8 @@ class _$_Raffle implements _Raffle {
       toSend,
       confirmDate,
       winner,
+      createdBy,
+      id,
       const DeepCollectionEquality().hash(_participants),
       updatedAt);
 
@@ -306,18 +362,20 @@ class _$_Raffle implements _Raffle {
 
 abstract class _Raffle implements Raffle {
   const factory _Raffle(
-      {required final Book book,
+      {final Book? book,
       required final String cep,
       required final DateTime toRaffle,
       required final DateTime createdAt,
       required final bool toSend,
       final DateTime? confirmDate,
       final User? winner,
+      final User? createdBy,
+      final String? id,
       required final List<User> participants,
       final DateTime? updatedAt}) = _$_Raffle;
 
   @override
-  Book get book;
+  Book? get book;
   @override
   String get cep;
   @override
@@ -330,6 +388,10 @@ abstract class _Raffle implements Raffle {
   DateTime? get confirmDate;
   @override
   User? get winner;
+  @override
+  User? get createdBy;
+  @override
+  String? get id;
   @override
   List<User> get participants;
   @override

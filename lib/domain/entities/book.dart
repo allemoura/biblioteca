@@ -13,5 +13,6 @@ abstract class Book with _$Book {
     String? isbn10,
     String? isbn13,
     String? cover,
+    String? id,
   }) = _Book;
 }

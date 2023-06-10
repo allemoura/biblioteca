@@ -7,17 +7,17 @@ part of 'library_data.dart';
 // **************************************************************************
 
 LibraryData _$LibraryDataFromJson(Map<String, dynamic> json) => LibraryData(
-      reads: (json['reads'] as List<dynamic>)
-          .map((e) => BookData.fromJson(e as Map<String, dynamic>))
+      reads: (json['reads'] as List<dynamic>?)
+          ?.map((e) => BookData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      toRead: (json['toRead'] as List<dynamic>)
-          .map((e) => BookData.fromJson(e as Map<String, dynamic>))
+      toRead: (json['toRead'] as List<dynamic>?)
+          ?.map((e) => BookData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      exchangeds: (json['exchangeds'] as List<dynamic>)
-          .map((e) => BookData.fromJson(e as Map<String, dynamic>))
+      exchangeds: (json['exchangeds'] as List<dynamic>?)
+          ?.map((e) => BookData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      donateds: (json['donateds'] as List<dynamic>)
-          .map((e) => BookData.fromJson(e as Map<String, dynamic>))
+      donateds: (json['donateds'] as List<dynamic>?)
+          ?.map((e) => BookData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
