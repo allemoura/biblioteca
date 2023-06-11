@@ -4,6 +4,7 @@ import 'package:biblioteca/domain/entities/book.dart';
 import 'package:biblioteca/domain/entities/library.dart';
 import 'package:biblioteca/infra/models/library_data.dart';
 import 'package:biblioteca/infra/models/user_data.dart';
+import 'package:biblioteca/infra/repositories/book_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,10 @@ class UserModel extends Model {
         final data = docUser.data() as Map<String, dynamic>;
 
         userData = UserData.fromJson(data);
+
+        userData = UserData.fromEntity(userData!
+            .toEntity()
+            .copyWith(library: await convertLibrary(data["library"])));
       }
     }
     notifyListeners();
@@ -51,6 +56,30 @@ class UserModel extends Model {
 
   bool isLoggedIn() {
     return _firebaseUser != null;
+  }
+
+  Future<Library> convertLibrary(Map<String, dynamic> data) async {
+    final toRead = await getBook(data["toRead"]);
+    final reads = await getBook(data["reads"]);
+    final donateds = await getBook(data["donateds"]);
+    final exchangeds = await getBook(data["exchangeds"]);
+
+    return const Library(toRead: [], reads: [], exchangeds: [], donateds: [])
+        .copyWith(
+            toRead: toRead,
+            reads: reads,
+            exchangeds: exchangeds,
+            donateds: donateds);
+  }
+
+  Future<List<Book>> getBook(List<dynamic> books) async {
+    List<Book> booksConvert = [];
+
+    for (final bookId in books) {
+      final newBook = await BookModel().getBookById(bookId);
+      booksConvert.add(newBook.toEntity());
+    }
+    return booksConvert;
   }
 
   Future<bool> signUp(
@@ -70,11 +99,11 @@ class UserModel extends Model {
       _firebaseUser = _auth.currentUser;
 
       await _saveUserData(UserData(
-          name: name,
-          email: email,
-          library:
-              LibraryData(reads: [], toRead: [], exchangeds: [], donateds: []),
-          raffles: []));
+        name: name,
+        email: email,
+        library:
+            LibraryData(reads: [], toRead: [], exchangeds: [], donateds: []),
+      ));
       await _loadCurrentUser();
 
       isLoding = false;
@@ -112,8 +141,7 @@ class UserModel extends Model {
     this.userData = userData;
     if (userData != null) {
       Map<String, dynamic> data = userData.toJson();
-      data["library"] = userData.library.toJson();
-      data["raffles"] = [];
+      data["library"] = userData.library!.toJson();
 
       await _firestore.collection("users").doc(_firebaseUser!.uid).set(data);
     }
@@ -202,11 +230,11 @@ class UserModel extends Model {
     try {
       _userCredential = await _auth.signInWithCredential(credential);
       await updateUserDate(UserData(
-          name: _userCredential!.user!.displayName!,
-          email: _userCredential!.user!.email!,
-          library:
-              LibraryData(reads: [], toRead: [], exchangeds: [], donateds: []),
-          raffles: []));
+        name: _userCredential!.user!.displayName!,
+        email: _userCredential!.user!.email!,
+        library:
+            LibraryData(reads: [], toRead: [], exchangeds: [], donateds: []),
+      ));
       await _loadCurrentUser();
 
       isLoding = false;
@@ -221,9 +249,11 @@ class UserModel extends Model {
   }
 
   Future<void> addNewBookRead(Book book) async {
-    Library library = userData!.library.toEntity();
+    Library library = userData!.library!.toEntity();
     List<Book> reads = [];
     reads.addAll(library.reads);
+
+    if (verifeBook(reads, book)) return;
     reads.add(book);
     library = library.copyWith(reads: reads);
     await updateUser(
@@ -232,9 +262,11 @@ class UserModel extends Model {
   }
 
   Future<void> addNewBookToRead(Book book) async {
-    Library library = userData!.library.toEntity();
+    Library library = userData!.library!.toEntity();
     List<Book> toRead = [];
     toRead.addAll(library.toRead);
+
+    if (verifeBook(toRead, book)) return;
     toRead.add(book);
     library = library.copyWith(toRead: toRead);
     await updateUser(
@@ -243,9 +275,11 @@ class UserModel extends Model {
   }
 
   Future<void> addNewBookDonated(Book book) async {
-    Library library = userData!.library.toEntity();
+    Library library = userData!.library!.toEntity();
     List<Book> donateds = [];
     donateds.addAll(library.donateds);
+
+    if (verifeBook(donateds, book)) return;
     donateds.add(book);
     library = library.copyWith(donateds: donateds);
     await updateUser(
@@ -254,13 +288,27 @@ class UserModel extends Model {
   }
 
   Future<void> addNewBookExchanged(Book book) async {
-    Library library = userData!.library.toEntity();
+    Library library = userData!.library!.toEntity();
     List<Book> exchangeds = [];
     exchangeds.addAll(library.exchangeds);
+
+    if (verifeBook(exchangeds, book)) return;
     exchangeds.add(book);
     library = library.copyWith(exchangeds: exchangeds);
     await updateUser(
         userData: UserData.fromEntity(
             userData!.toEntity().copyWith(library: library)));
+  }
+
+  bool verifeBook(List<Book> books, Book book) {
+    bool contais = false;
+
+    for (final bookContain in books) {
+      if (bookContain.id == book.id) {
+        contais = true;
+        break;
+      }
+    }
+    return contais;
   }
 }

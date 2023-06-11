@@ -9,7 +9,7 @@ part 'book_review_data.g.dart';
 
 @JsonSerializable()
 class BookReviewData {
-  @JsonKey(toJson: paramToJson, includeFromJson: false)
+  @JsonKey(toJson: paramToJson, fromJson: paramFromJson)
   final UserData? author;
   final double stars;
 
@@ -50,4 +50,14 @@ class BookReviewData {
 
 String paramToJson(UserData? user) {
   return user?.id ?? "";
+}
+
+UserData? paramFromJson(String userId) {
+  UserData? user;
+  FirebaseFirestore.instance
+      .collection("users")
+      .doc(userId)
+      .get()
+      .then((value) => user = UserData.fromJson(value.data()!));
+  return user;
 }

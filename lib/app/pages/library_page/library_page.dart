@@ -69,24 +69,24 @@ class _LibraryPageState extends State<LibraryPage>
                 controller: store.tabController,
                 children: [
                   CustomGrid(
-                    content: store.model!.userData!.library.reads!
+                    content: store.model!.userData!.library!.reads!
                         .map((book) =>
                             BookDetails(book: book.toEntity(), isRead: true))
                         .toList(),
                   ),
                   CustomGrid(
-                    content: store.model!.userData!.library.toRead!
+                    content: store.model!.userData!.library!.toRead!
                         .map((book) =>
                             BookDetails(book: book.toEntity(), isRead: false))
                         .toList(),
                   ),
                   CustomGrid(
-                    content: store.model!.userData!.library.exchangeds!
+                    content: store.model!.userData!.library!.exchangeds!
                         .map((book) => BookDetails(book: book.toEntity()))
                         .toList(),
                   ),
                   CustomGrid(
-                    content: store.model!.userData!.library.donateds!
+                    content: store.model!.userData!.library!.donateds!
                         .map((book) => BookDetails(book: book.toEntity()))
                         .toList(),
                   ),

@@ -10,10 +10,10 @@ part 'raffle_data.g.dart';
 
 @JsonSerializable()
 class RaffleData {
-  @JsonKey(includeToJson: false, includeFromJson: false)
+  @JsonKey(toJson: bookParamToJson, includeFromJson: false)
   final BookData? book;
   final String cep;
-  @JsonKey(includeToJson: false, includeFromJson: false)
+  @JsonKey(toJson: createdByParamToJson, includeFromJson: false)
   final UserData? createdBy;
   @ServerTimestampConverter()
   final DateTime toRaffle;
@@ -24,9 +24,9 @@ class RaffleData {
   @TimestampConverter()
   final DateTime? confirmDate;
   final bool toSend;
-  @JsonKey(includeToJson: false, includeFromJson: false)
+  @JsonKey(toJson: winnerParamToJson, includeFromJson: false)
   final UserData? winner;
-  @JsonKey(includeToJson: false, includeFromJson: false)
+  @JsonKey(toJson: participantsParamToJson, includeFromJson: false)
   final List<UserData>? participants;
   final String? id;
 
@@ -80,3 +80,20 @@ class RaffleData {
       _$RaffleDataFromJson(json);
   Map<String, dynamic> toJson() => _$RaffleDataToJson(this);
 }
+
+String? createdByParamToJson(UserData? userData) {
+  if (userData == null) return null;
+  return userData.id!;
+}
+
+String? winnerParamToJson(UserData? userData) {
+  if (userData == null) return null;
+  return userData.id!;
+}
+
+List<String>? participantsParamToJson(List<UserData>? usersData) {
+  if (usersData == null) return null;
+  return usersData.map((e) => e.id!).toList();
+}
+
+String bookParamToJson(BookData? book) => book!.id!;

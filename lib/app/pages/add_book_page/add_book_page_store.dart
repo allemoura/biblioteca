@@ -59,9 +59,9 @@ abstract class AddBookPageBase with Store {
       reviwes.add(bookReview!);
       book = book.copyWith(reviews: reviwes);
     }
-    if (!await bookModel.contaisBook(book.id!)) {
-      await bookModel.addNewBook(book);
-    }
+
+    await bookModel.addNewBook(book);
+
     if (selectedRadio == "Quero ler") {
       userModel!.addNewBookToRead(book);
     } else {
