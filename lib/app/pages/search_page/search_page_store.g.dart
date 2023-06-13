@@ -24,10 +24,60 @@ mixin _$SearchPageStore on SearchPageBase, Store {
     });
   }
 
+  late final _$usersAtom = Atom(name: 'SearchPageBase.users', context: context);
+
+  @override
+  ObservableList<User> get users {
+    _$usersAtom.reportRead();
+    return super.users;
+  }
+
+  @override
+  set users(ObservableList<User> value) {
+    _$usersAtom.reportWrite(value, super.users, () {
+      super.users = value;
+    });
+  }
+
+  late final _$filterOptionAtom =
+      Atom(name: 'SearchPageBase.filterOption', context: context);
+
+  @override
+  String get filterOption {
+    _$filterOptionAtom.reportRead();
+    return super.filterOption;
+  }
+
+  @override
+  set filterOption(String value) {
+    _$filterOptionAtom.reportWrite(value, super.filterOption, () {
+      super.filterOption = value;
+    });
+  }
+
+  late final _$userModelAtom =
+      Atom(name: 'SearchPageBase.userModel', context: context);
+
+  @override
+  UserModel? get userModel {
+    _$userModelAtom.reportRead();
+    return super.userModel;
+  }
+
+  @override
+  set userModel(UserModel? value) {
+    _$userModelAtom.reportWrite(value, super.userModel, () {
+      super.userModel = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-books: ${books}
+books: ${books},
+users: ${users},
+filterOption: ${filterOption},
+userModel: ${userModel}
     ''';
   }
 }

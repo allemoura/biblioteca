@@ -186,6 +186,8 @@ class UserModel extends Model {
     try {
       await _saveUserData(userData);
 
+      await _loadCurrentUser();
+
       isLoding = false;
       notifyListeners();
     } catch (e) {
@@ -310,5 +312,27 @@ class UserModel extends Model {
       }
     }
     return contais;
+  }
+
+  Future<List<UserData>> getUsersByFilter(String? user) async {
+    List<UserData> users = [];
+
+    final docUser = await _firestore
+        .collection("users")
+        .where("name", isGreaterThanOrEqualTo: user)
+        .where("name", isLessThan: '${user}z')
+        .get();
+
+    for (final doc in docUser.docs) {
+      final data = doc.data();
+
+      UserData user = UserData.fromJson(data);
+
+      user = UserData.fromEntity(user
+          .toEntity()
+          .copyWith(library: await convertLibrary(data["library"])));
+      users.add(user);
+    }
+    return users;
   }
 }
