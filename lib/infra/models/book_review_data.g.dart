@@ -9,6 +9,7 @@ part of 'book_review_data.dart';
 BookReviewData _$BookReviewDataFromJson(Map<String, dynamic> json) =>
     BookReviewData(
       stars: (json['stars'] as num).toDouble(),
+      author: paramFromJson(json['author'] as String),
       createdAt: const ServerTimestampConverter()
           .fromJson(json['createdAt'] as Timestamp),
       review: json['review'] as String?,
@@ -18,6 +19,7 @@ BookReviewData _$BookReviewDataFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$BookReviewDataToJson(BookReviewData instance) =>
     <String, dynamic>{
+      'author': paramToJson(instance.author),
       'stars': instance.stars,
       'createdAt': const ServerTimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),

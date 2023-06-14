@@ -5,6 +5,7 @@ import 'package:biblioteca/app/widgets/dialogs/confirm_rafffle.dart';
 import 'package:biblioteca/domain/entities/raffle.dart';
 import 'package:biblioteca/domain/entities/user.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class RaffleView extends StatelessWidget {
   final Raffle raffle;
@@ -26,15 +27,21 @@ class RaffleView extends StatelessWidget {
           width: 150,
           margin: const EdgeInsets.only(left: 5, right: 5),
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: Image.network(raffle.book!.cover!).image)),
+            image: DecorationImage(
+                image: FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: raffle.book!.cover!,
+              width: 120,
+              height: 120,
+            ).image),
+          ),
         ),
         const SizedBox(height: 5),
         CustomText(value: raffle.toRaffle.customToString()),
         const SizedBox(height: 5),
         CustomButton(
-          enable: (!raffle.participants.contains(currentUser) &&
-              raffle.createdBy != currentUser),
+          enable:
+              (!verifyIsInRaffle() && raffle.createdBy!.id != currentUser.id),
           width: 140,
           title: "Participar",
           onTap: () {
@@ -47,5 +54,14 @@ class RaffleView extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool verifyIsInRaffle() {
+    for (final participant in raffle.participants) {
+      if (participant.id == currentUser.id) {
+        return true;
+      }
+    }
+    return false;
   }
 }

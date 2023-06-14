@@ -20,6 +20,7 @@ mixin _$Book {
   String get author => throw _privateConstructorUsedError;
   DateTime get releaseDate => throw _privateConstructorUsedError;
   List<BookReview> get reviews => throw _privateConstructorUsedError;
+  bool get toExchanged => throw _privateConstructorUsedError;
   String? get isbn10 => throw _privateConstructorUsedError;
   String? get isbn13 => throw _privateConstructorUsedError;
   String? get cover => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $BookCopyWith<$Res> {
       String author,
       DateTime releaseDate,
       List<BookReview> reviews,
+      bool toExchanged,
       String? isbn10,
       String? isbn13,
       String? cover,
@@ -62,6 +64,7 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
     Object? author = null,
     Object? releaseDate = null,
     Object? reviews = null,
+    Object? toExchanged = null,
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
     Object? cover = freezed,
@@ -84,6 +87,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<BookReview>,
+      toExchanged: null == toExchanged
+          ? _value.toExchanged
+          : toExchanged // ignore: cast_nullable_to_non_nullable
+              as bool,
       isbn10: freezed == isbn10
           ? _value.isbn10
           : isbn10 // ignore: cast_nullable_to_non_nullable
@@ -115,6 +122,7 @@ abstract class _$$_BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       String author,
       DateTime releaseDate,
       List<BookReview> reviews,
+      bool toExchanged,
       String? isbn10,
       String? isbn13,
       String? cover,
@@ -134,6 +142,7 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
     Object? author = null,
     Object? releaseDate = null,
     Object? reviews = null,
+    Object? toExchanged = null,
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
     Object? cover = freezed,
@@ -156,6 +165,10 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
           ? _value._reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<BookReview>,
+      toExchanged: null == toExchanged
+          ? _value.toExchanged
+          : toExchanged // ignore: cast_nullable_to_non_nullable
+              as bool,
       isbn10: freezed == isbn10
           ? _value.isbn10
           : isbn10 // ignore: cast_nullable_to_non_nullable
@@ -184,6 +197,7 @@ class _$_Book implements _Book {
       required this.author,
       required this.releaseDate,
       required final List<BookReview> reviews,
+      required this.toExchanged,
       this.isbn10,
       this.isbn13,
       this.cover,
@@ -205,6 +219,8 @@ class _$_Book implements _Book {
   }
 
   @override
+  final bool toExchanged;
+  @override
   final String? isbn10;
   @override
   final String? isbn13;
@@ -215,7 +231,7 @@ class _$_Book implements _Book {
 
   @override
   String toString() {
-    return 'Book(title: $title, author: $author, releaseDate: $releaseDate, reviews: $reviews, isbn10: $isbn10, isbn13: $isbn13, cover: $cover, id: $id)';
+    return 'Book(title: $title, author: $author, releaseDate: $releaseDate, reviews: $reviews, toExchanged: $toExchanged, isbn10: $isbn10, isbn13: $isbn13, cover: $cover, id: $id)';
   }
 
   @override
@@ -228,6 +244,8 @@ class _$_Book implements _Book {
             (identical(other.releaseDate, releaseDate) ||
                 other.releaseDate == releaseDate) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
+            (identical(other.toExchanged, toExchanged) ||
+                other.toExchanged == toExchanged) &&
             (identical(other.isbn10, isbn10) || other.isbn10 == isbn10) &&
             (identical(other.isbn13, isbn13) || other.isbn13 == isbn13) &&
             (identical(other.cover, cover) || other.cover == cover) &&
@@ -235,8 +253,17 @@ class _$_Book implements _Book {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, author, releaseDate,
-      const DeepCollectionEquality().hash(_reviews), isbn10, isbn13, cover, id);
+  int get hashCode => Object.hash(
+      runtimeType,
+      title,
+      author,
+      releaseDate,
+      const DeepCollectionEquality().hash(_reviews),
+      toExchanged,
+      isbn10,
+      isbn13,
+      cover,
+      id);
 
   @JsonKey(ignore: true)
   @override
@@ -251,6 +278,7 @@ abstract class _Book implements Book {
       required final String author,
       required final DateTime releaseDate,
       required final List<BookReview> reviews,
+      required final bool toExchanged,
       final String? isbn10,
       final String? isbn13,
       final String? cover,
@@ -264,6 +292,8 @@ abstract class _Book implements Book {
   DateTime get releaseDate;
   @override
   List<BookReview> get reviews;
+  @override
+  bool get toExchanged;
   @override
   String? get isbn10;
   @override

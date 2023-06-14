@@ -1,6 +1,5 @@
 import 'package:biblioteca/domain/entities/user.dart';
 import 'package:biblioteca/infra/models/library_data.dart';
-import 'package:biblioteca/infra/models/raffle_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_data.g.dart';
@@ -13,17 +12,13 @@ class UserData {
   final String? imageProfile;
   final String? id;
 
-  @JsonKey(includeToJson: false)
-  final LibraryData library;
-
-  @JsonKey(includeToJson: false)
-  final List<RaffleData> raffles;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final LibraryData? library;
 
   UserData(
       {required this.name,
       required this.email,
-      required this.library,
-      required this.raffles,
+      this.library,
       this.password,
       this.imageProfile,
       this.id});
@@ -33,8 +28,9 @@ class UserData {
       id: entity.id,
       email: entity.email,
       imageProfile: entity.imageProfile,
-      library: LibraryData.fromEntity(entity.library),
-      raffles: entity.raffles.map((e) => RaffleData.fromEntity(e)).toList(),
+      library: entity.library == null
+          ? null
+          : LibraryData.fromEntity(entity.library!),
       password: entity.password);
 
   User toEntity() => User(
@@ -42,8 +38,7 @@ class UserData {
       email: email,
       id: id,
       imageProfile: imageProfile,
-      library: library.toEntity(),
-      raffles: raffles.map((e) => e.toEntity()).toList(),
+      library: library?.toEntity(),
       password: password);
 
   factory UserData.fromJson(Map<String, dynamic> json) =>

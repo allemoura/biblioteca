@@ -23,8 +23,8 @@ LibraryData _$LibraryDataFromJson(Map<String, dynamic> json) => LibraryData(
 
 Map<String, dynamic> _$LibraryDataToJson(LibraryData instance) =>
     <String, dynamic>{
-      'reads': instance.reads,
-      'toRead': instance.toRead,
-      'exchangeds': instance.exchangeds,
-      'donateds': instance.donateds,
+      'reads': paramToJson(instance.reads),
+      'toRead': paramToJson(instance.toRead),
+      'exchangeds': paramToJson(instance.exchangeds),
+      'donateds': paramToJson(instance.donateds),
     };

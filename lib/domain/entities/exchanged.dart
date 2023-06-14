@@ -7,7 +7,10 @@ part 'exchanged.freezed.dart';
 @freezed
 abstract class Exchanged with _$Exchanged {
   const factory Exchanged(
-      {required User userExchanged,
-      required Book bookExchanged,
+      {required String id,
+      User? userExchanged,
+      required User userSend,
+      Book? bookExchanged,
+      bool? accepted,
       required Book bookSend}) = _Exchanged;
 }

@@ -56,17 +56,17 @@ class RegisterPage extends StatelessWidget {
                 await store.registerWithEmail().then((value) {
                   if (value) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: CustomText(
-                      value: "Usuario registrado com sucesso!",
+                        content: Text(
+                      "Usuario registrado com sucesso!",
                     )));
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const MainPage()));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: CustomText(
-                      value: "Erro ao registrar usuario, tente novamente!",
+                        content: Text(
+                      "Erro ao registrar usuario, tente novamente!",
                     )));
                   }
                 });

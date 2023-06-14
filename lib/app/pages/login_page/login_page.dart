@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height * 0.08),
             Center(
               child: CustomText(
-                value: "Cadastro",
+                value: "Bem-vindo de volta",
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
                 textColor: textColor,

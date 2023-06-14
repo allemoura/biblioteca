@@ -24,7 +24,26 @@ class RaffleModel extends Model {
   Future<List<Raffle>> getAllRafflesFilterByUser(String userId) async {
     final result = await _firestore
         .collection("raffles")
-        .where({"createdBy": userId}).get();
+        .where("createdBy", isEqualTo: userId)
+        .get();
+
+    final data = result.docs.map((e) => e.data()).toList();
+
+    List<Raffle> raffles = [];
+
+    for (final raffleData in data) {
+      final raffle = RaffleData.fromJson(raffleData).toEntity();
+
+      raffles.add(await convertRaffle(raffle, raffleData));
+    }
+    return raffles;
+  }
+
+  Future<List<Raffle>> getAllRafflesFilterByParticipants(String userId) async {
+    final result = await _firestore
+        .collection("raffles")
+        .where("participants", arrayContains: userId)
+        .get();
 
     final data = result.docs.map((e) => e.data()).toList();
 
@@ -64,13 +83,16 @@ class RaffleModel extends Model {
       Raffle raffle, Map<String, dynamic> raffleData) async {
     final List<User> participants = [];
 
-    for (final userId in raffleData["participants"]) {
-      final user = await getUser(userId);
-      participants.add(user!);
+    if (raffleData.containsKey("participants")) {
+      for (final userId in raffleData["participants"]) {
+        final user = await getUser(userId);
+        participants.add(user!);
+      }
     }
+
     return raffle.copyWith(
         book: await getBook(raffleData["book"]),
-        createdBy: await getUser(raffleData["cretedBy"]),
+        createdBy: await getUser(raffleData["createdBy"]),
         winner: raffleData.containsKey("winner")
             ? await getUser(raffleData["winner"])
             : null,
@@ -99,13 +121,26 @@ class RaffleModel extends Model {
   }
 
   Future<void> addNewParticipant(Raffle raffle, User participant) async {
-    final newParticipants = raffle.participants;
+    List<User> newParticipants = [];
+    newParticipants.addAll(raffle.participants);
     newParticipants.add(participant);
-    Map<String, dynamic> data =
-        RaffleData.fromEntity(raffle.copyWith(participants: newParticipants))
-            .toJson();
-    data["participants"] = newParticipants.map((e) => e.id).toList();
-    data["book"] = raffle.book!.id;
-    await _firestore.collection("raffles").doc(raffle.id).set(data);
+    raffle = raffle.copyWith(participants: newParticipants);
+
+    await _firestore
+        .collection("raffles")
+        .doc(raffle.id)
+        .set(RaffleData.fromEntity(raffle).toJson());
+  }
+
+  Future<void> addNewRaffle(Raffle raffle) async {
+    final result = await _firestore
+        .collection("raffles")
+        .add(RaffleData.fromEntity(raffle).toJson());
+    raffle = raffle.copyWith(id: result.id);
+
+    await _firestore
+        .collection("raffles")
+        .doc(raffle.id)
+        .set(RaffleData.fromEntity(raffle).toJson());
   }
 }

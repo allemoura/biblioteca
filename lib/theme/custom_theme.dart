@@ -7,6 +7,18 @@ class CustomThemes {
     iconTheme: const IconThemeData(
       color: AppColors.primaryColor,
     ),
+    snackBarTheme: const SnackBarThemeData(
+        backgroundColor: AppColors.primaryColor,
+        contentTextStyle: TextStyle(color: Colors.white)),
+    tabBarTheme: const TabBarTheme(
+      indicatorColor: AppColors.primaryColor,
+      labelColor: Colors.black,
+      labelStyle: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+    ),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {

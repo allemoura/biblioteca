@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:biblioteca/domain/entities/book.dart';
 import 'package:biblioteca/infra/models/book_review_data.dart';
 import 'package:biblioteca/infra/utils/server_timestamp_converter.dart';
@@ -19,11 +17,13 @@ class BookData {
   final String? isbn10;
   final String? isbn13;
   final String? cover;
-  
+
   @JsonKey(includeToJson: true)
   final List<BookReviewData> reviews;
 
   final String? id;
+
+  final bool toEchanged;
 
   BookData(
       {required this.title,
@@ -33,7 +33,8 @@ class BookData {
       this.isbn10,
       this.isbn13,
       this.cover,
-      this.id});
+      this.id,
+      this.toEchanged = false});
 
   factory BookData.fromEntity(Book entity) => BookData(
       reviews: entity.reviews.map((e) => BookReviewData.fromEntity(e)).toList(),
@@ -43,7 +44,8 @@ class BookData {
       isbn10: entity.isbn10,
       isbn13: entity.isbn13,
       id: entity.id,
-      cover: entity.cover);
+      cover: entity.cover,
+      toEchanged: entity.toExchanged);
 
   Book toEntity() => Book(
       title: title,
@@ -53,6 +55,7 @@ class BookData {
       isbn13: isbn13,
       cover: cover,
       id: id,
+      toExchanged: toEchanged,
       reviews: reviews.map((e) => e.toEntity()).toList());
 
   factory BookData.fromGoogleBook(Map<String, dynamic> json) {

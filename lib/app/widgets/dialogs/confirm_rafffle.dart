@@ -2,7 +2,6 @@ import 'package:biblioteca/app/utils/extensions/datetime_extension.dart';
 import 'package:biblioteca/app/widgets/custom_buttom.dart';
 import 'package:biblioteca/app/widgets/custom_text.dart';
 import 'package:biblioteca/domain/entities/raffle.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmRaffle extends StatelessWidget {
@@ -38,15 +37,19 @@ class ConfirmRaffle extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: 180,
+                    width: 190,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const CustomText(
                           value: "Data do sorteio: ",
                           fontWeight: FontWeight.bold,
+                          fontSize: 12,
                         ),
-                        CustomText(value: raffle.toRaffle.customToString())
+                        CustomText(
+                          value: raffle.toRaffle.customToString(),
+                          fontSize: 13.5,
+                        )
                       ],
                     ),
                   ),
@@ -73,12 +76,15 @@ class ConfirmRaffle extends StatelessWidget {
           children: [
             CustomButton(
               title: "NÃO",
-              enable: false,
+              backgroundColor: Theme.of(context).colorScheme.onTertiary,
               onTap: () => Navigator.pop(context),
             ),
             CustomButton(
               title: "SIM",
-              onTap: onConfirm,
+              onTap: () {
+                onConfirm();
+                Navigator.pop(context);
+              },
             ),
           ],
         )

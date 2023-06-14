@@ -18,8 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  Library get library => throw _privateConstructorUsedError;
-  List<Raffle> get raffles => throw _privateConstructorUsedError;
+  Library? get library => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
   String? get imageProfile => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
@@ -36,13 +35,12 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String name,
       String email,
-      Library library,
-      List<Raffle> raffles,
+      Library? library,
       String? password,
       String? imageProfile,
       String? id});
 
-  $LibraryCopyWith<$Res> get library;
+  $LibraryCopyWith<$Res>? get library;
 }
 
 /// @nodoc
@@ -60,8 +58,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? name = null,
     Object? email = null,
-    Object? library = null,
-    Object? raffles = null,
+    Object? library = freezed,
     Object? password = freezed,
     Object? imageProfile = freezed,
     Object? id = freezed,
@@ -75,14 +72,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      library: null == library
+      library: freezed == library
           ? _value.library
           : library // ignore: cast_nullable_to_non_nullable
-              as Library,
-      raffles: null == raffles
-          ? _value.raffles
-          : raffles // ignore: cast_nullable_to_non_nullable
-              as List<Raffle>,
+              as Library?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -100,8 +93,12 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 
   @override
   @pragma('vm:prefer-inline')
-  $LibraryCopyWith<$Res> get library {
-    return $LibraryCopyWith<$Res>(_value.library, (value) {
+  $LibraryCopyWith<$Res>? get library {
+    if (_value.library == null) {
+      return null;
+    }
+
+    return $LibraryCopyWith<$Res>(_value.library!, (value) {
       return _then(_value.copyWith(library: value) as $Val);
     });
   }
@@ -116,14 +113,13 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String name,
       String email,
-      Library library,
-      List<Raffle> raffles,
+      Library? library,
       String? password,
       String? imageProfile,
       String? id});
 
   @override
-  $LibraryCopyWith<$Res> get library;
+  $LibraryCopyWith<$Res>? get library;
 }
 
 /// @nodoc
@@ -137,8 +133,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   $Res call({
     Object? name = null,
     Object? email = null,
-    Object? library = null,
-    Object? raffles = null,
+    Object? library = freezed,
     Object? password = freezed,
     Object? imageProfile = freezed,
     Object? id = freezed,
@@ -152,14 +147,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      library: null == library
+      library: freezed == library
           ? _value.library
           : library // ignore: cast_nullable_to_non_nullable
-              as Library,
-      raffles: null == raffles
-          ? _value._raffles
-          : raffles // ignore: cast_nullable_to_non_nullable
-              as List<Raffle>,
+              as Library?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -182,27 +173,17 @@ class _$_User implements _User {
   const _$_User(
       {required this.name,
       required this.email,
-      required this.library,
-      required final List<Raffle> raffles,
+      this.library,
       this.password,
       this.imageProfile,
-      this.id})
-      : _raffles = raffles;
+      this.id});
 
   @override
   final String name;
   @override
   final String email;
   @override
-  final Library library;
-  final List<Raffle> _raffles;
-  @override
-  List<Raffle> get raffles {
-    if (_raffles is EqualUnmodifiableListView) return _raffles;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_raffles);
-  }
-
+  final Library? library;
   @override
   final String? password;
   @override
@@ -212,7 +193,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(name: $name, email: $email, library: $library, raffles: $raffles, password: $password, imageProfile: $imageProfile, id: $id)';
+    return 'User(name: $name, email: $email, library: $library, password: $password, imageProfile: $imageProfile, id: $id)';
   }
 
   @override
@@ -223,7 +204,6 @@ class _$_User implements _User {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.library, library) || other.library == library) &&
-            const DeepCollectionEquality().equals(other._raffles, _raffles) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.imageProfile, imageProfile) ||
@@ -233,14 +213,7 @@ class _$_User implements _User {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      name,
-      email,
-      library,
-      const DeepCollectionEquality().hash(_raffles),
-      password,
-      imageProfile,
-      id);
+      runtimeType, name, email, library, password, imageProfile, id);
 
   @JsonKey(ignore: true)
   @override
@@ -253,8 +226,7 @@ abstract class _User implements User {
   const factory _User(
       {required final String name,
       required final String email,
-      required final Library library,
-      required final List<Raffle> raffles,
+      final Library? library,
       final String? password,
       final String? imageProfile,
       final String? id}) = _$_User;
@@ -264,9 +236,7 @@ abstract class _User implements User {
   @override
   String get email;
   @override
-  Library get library;
-  @override
-  List<Raffle> get raffles;
+  Library? get library;
   @override
   String? get password;
   @override

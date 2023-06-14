@@ -16,8 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Exchanged {
-  User get userExchanged => throw _privateConstructorUsedError;
-  Book get bookExchanged => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  User? get userExchanged => throw _privateConstructorUsedError;
+  User get userSend => throw _privateConstructorUsedError;
+  Book? get bookExchanged => throw _privateConstructorUsedError;
+  bool? get accepted => throw _privateConstructorUsedError;
   Book get bookSend => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,10 +33,17 @@ abstract class $ExchangedCopyWith<$Res> {
   factory $ExchangedCopyWith(Exchanged value, $Res Function(Exchanged) then) =
       _$ExchangedCopyWithImpl<$Res, Exchanged>;
   @useResult
-  $Res call({User userExchanged, Book bookExchanged, Book bookSend});
+  $Res call(
+      {String id,
+      User? userExchanged,
+      User userSend,
+      Book? bookExchanged,
+      bool? accepted,
+      Book bookSend});
 
-  $UserCopyWith<$Res> get userExchanged;
-  $BookCopyWith<$Res> get bookExchanged;
+  $UserCopyWith<$Res>? get userExchanged;
+  $UserCopyWith<$Res> get userSend;
+  $BookCopyWith<$Res>? get bookExchanged;
   $BookCopyWith<$Res> get bookSend;
 }
 
@@ -50,19 +60,34 @@ class _$ExchangedCopyWithImpl<$Res, $Val extends Exchanged>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userExchanged = null,
-    Object? bookExchanged = null,
+    Object? id = null,
+    Object? userExchanged = freezed,
+    Object? userSend = null,
+    Object? bookExchanged = freezed,
+    Object? accepted = freezed,
     Object? bookSend = null,
   }) {
     return _then(_value.copyWith(
-      userExchanged: null == userExchanged
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userExchanged: freezed == userExchanged
           ? _value.userExchanged
           : userExchanged // ignore: cast_nullable_to_non_nullable
+              as User?,
+      userSend: null == userSend
+          ? _value.userSend
+          : userSend // ignore: cast_nullable_to_non_nullable
               as User,
-      bookExchanged: null == bookExchanged
+      bookExchanged: freezed == bookExchanged
           ? _value.bookExchanged
           : bookExchanged // ignore: cast_nullable_to_non_nullable
-              as Book,
+              as Book?,
+      accepted: freezed == accepted
+          ? _value.accepted
+          : accepted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       bookSend: null == bookSend
           ? _value.bookSend
           : bookSend // ignore: cast_nullable_to_non_nullable
@@ -72,16 +97,32 @@ class _$ExchangedCopyWithImpl<$Res, $Val extends Exchanged>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get userExchanged {
-    return $UserCopyWith<$Res>(_value.userExchanged, (value) {
+  $UserCopyWith<$Res>? get userExchanged {
+    if (_value.userExchanged == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.userExchanged!, (value) {
       return _then(_value.copyWith(userExchanged: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $BookCopyWith<$Res> get bookExchanged {
-    return $BookCopyWith<$Res>(_value.bookExchanged, (value) {
+  $UserCopyWith<$Res> get userSend {
+    return $UserCopyWith<$Res>(_value.userSend, (value) {
+      return _then(_value.copyWith(userSend: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookCopyWith<$Res>? get bookExchanged {
+    if (_value.bookExchanged == null) {
+      return null;
+    }
+
+    return $BookCopyWith<$Res>(_value.bookExchanged!, (value) {
       return _then(_value.copyWith(bookExchanged: value) as $Val);
     });
   }
@@ -102,12 +143,20 @@ abstract class _$$_ExchangedCopyWith<$Res> implements $ExchangedCopyWith<$Res> {
       __$$_ExchangedCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User userExchanged, Book bookExchanged, Book bookSend});
+  $Res call(
+      {String id,
+      User? userExchanged,
+      User userSend,
+      Book? bookExchanged,
+      bool? accepted,
+      Book bookSend});
 
   @override
-  $UserCopyWith<$Res> get userExchanged;
+  $UserCopyWith<$Res>? get userExchanged;
   @override
-  $BookCopyWith<$Res> get bookExchanged;
+  $UserCopyWith<$Res> get userSend;
+  @override
+  $BookCopyWith<$Res>? get bookExchanged;
   @override
   $BookCopyWith<$Res> get bookSend;
 }
@@ -123,19 +172,34 @@ class __$$_ExchangedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userExchanged = null,
-    Object? bookExchanged = null,
+    Object? id = null,
+    Object? userExchanged = freezed,
+    Object? userSend = null,
+    Object? bookExchanged = freezed,
+    Object? accepted = freezed,
     Object? bookSend = null,
   }) {
     return _then(_$_Exchanged(
-      userExchanged: null == userExchanged
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userExchanged: freezed == userExchanged
           ? _value.userExchanged
           : userExchanged // ignore: cast_nullable_to_non_nullable
+              as User?,
+      userSend: null == userSend
+          ? _value.userSend
+          : userSend // ignore: cast_nullable_to_non_nullable
               as User,
-      bookExchanged: null == bookExchanged
+      bookExchanged: freezed == bookExchanged
           ? _value.bookExchanged
           : bookExchanged // ignore: cast_nullable_to_non_nullable
-              as Book,
+              as Book?,
+      accepted: freezed == accepted
+          ? _value.accepted
+          : accepted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       bookSend: null == bookSend
           ? _value.bookSend
           : bookSend // ignore: cast_nullable_to_non_nullable
@@ -148,20 +212,29 @@ class __$$_ExchangedCopyWithImpl<$Res>
 
 class _$_Exchanged implements _Exchanged {
   const _$_Exchanged(
-      {required this.userExchanged,
-      required this.bookExchanged,
+      {required this.id,
+      this.userExchanged,
+      required this.userSend,
+      this.bookExchanged,
+      this.accepted,
       required this.bookSend});
 
   @override
-  final User userExchanged;
+  final String id;
   @override
-  final Book bookExchanged;
+  final User? userExchanged;
+  @override
+  final User userSend;
+  @override
+  final Book? bookExchanged;
+  @override
+  final bool? accepted;
   @override
   final Book bookSend;
 
   @override
   String toString() {
-    return 'Exchanged(userExchanged: $userExchanged, bookExchanged: $bookExchanged, bookSend: $bookSend)';
+    return 'Exchanged(id: $id, userExchanged: $userExchanged, userSend: $userSend, bookExchanged: $bookExchanged, accepted: $accepted, bookSend: $bookSend)';
   }
 
   @override
@@ -169,17 +242,22 @@ class _$_Exchanged implements _Exchanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Exchanged &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.userExchanged, userExchanged) ||
                 other.userExchanged == userExchanged) &&
+            (identical(other.userSend, userSend) ||
+                other.userSend == userSend) &&
             (identical(other.bookExchanged, bookExchanged) ||
                 other.bookExchanged == bookExchanged) &&
+            (identical(other.accepted, accepted) ||
+                other.accepted == accepted) &&
             (identical(other.bookSend, bookSend) ||
                 other.bookSend == bookSend));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userExchanged, bookExchanged, bookSend);
+  int get hashCode => Object.hash(runtimeType, id, userExchanged, userSend,
+      bookExchanged, accepted, bookSend);
 
   @JsonKey(ignore: true)
   @override
@@ -190,14 +268,23 @@ class _$_Exchanged implements _Exchanged {
 
 abstract class _Exchanged implements Exchanged {
   const factory _Exchanged(
-      {required final User userExchanged,
-      required final Book bookExchanged,
+      {required final String id,
+      final User? userExchanged,
+      required final User userSend,
+      final Book? bookExchanged,
+      final bool? accepted,
       required final Book bookSend}) = _$_Exchanged;
 
   @override
-  User get userExchanged;
+  String get id;
   @override
-  Book get bookExchanged;
+  User? get userExchanged;
+  @override
+  User get userSend;
+  @override
+  Book? get bookExchanged;
+  @override
+  bool? get accepted;
   @override
   Book get bookSend;
   @override

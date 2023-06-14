@@ -10,6 +10,7 @@ abstract class Book with _$Book {
     required String author,
     required DateTime releaseDate,
     required List<BookReview> reviews,
+    required bool toExchanged,
     String? isbn10,
     String? isbn13,
     String? cover,

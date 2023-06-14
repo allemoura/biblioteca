@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Biblioteca',
           theme: CustomThemes.lightTheme,
+          debugShowCheckedModeBanner: false,
           home: model.isLoggedIn() ? const MainPage() : const InitialPage(),
         );
       }),
