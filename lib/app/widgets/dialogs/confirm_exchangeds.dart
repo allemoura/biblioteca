@@ -1,13 +1,14 @@
+import 'package:biblioteca/app/pages/select_book_exchanged/select_book_exchanged.dart';
 import 'package:biblioteca/app/widgets/custom_buttom.dart';
 import 'package:biblioteca/app/widgets/custom_text.dart';
-import 'package:biblioteca/domain/entities/book.dart';
+import 'package:biblioteca/domain/entities/exchanged.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmExchangeds extends StatelessWidget {
-  final Book book;
+  final Exchanged exchanged;
   final Function() onConfirm;
   const ConfirmExchangeds(
-      {super.key, required this.book, required this.onConfirm});
+      {super.key, required this.exchanged, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class ConfirmExchangeds extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.network(
-            book.cover!,
+            exchanged.bookSend.cover!,
             width: 77,
             height: 110,
             fit: BoxFit.fill,
@@ -36,12 +37,19 @@ class ConfirmExchangeds extends StatelessWidget {
           children: [
             CustomButton(
               title: "NÃO",
-              enable: false,
+              backgroundColor: Theme.of(context).colorScheme.onTertiary,
               onTap: () => Navigator.pop(context),
             ),
             CustomButton(
               title: "SIM",
-              onTap: () => onConfirm(),
+              onTap: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SelectBookExchanged(
+                    exchanged: exchanged,
+                  ),
+                ),
+              ),
             ),
           ],
         )

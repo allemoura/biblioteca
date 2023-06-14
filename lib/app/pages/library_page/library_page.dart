@@ -83,7 +83,11 @@ class _LibraryPageState extends State<LibraryPage>
                     content: (widget.user ?? store.model!.userData!.toEntity())
                         .library!
                         .reads
-                        .map((book) => BookDetails(book: book, isRead: true))
+                        .map((book) => BookDetails(
+                              book: book,
+                              isRead: true,
+                              isLibrary: true,
+                            ))
                         .toList(),
                   ),
                   CustomGrid(
@@ -97,7 +101,10 @@ class _LibraryPageState extends State<LibraryPage>
                     content: (widget.user ?? store.model!.userData!.toEntity())
                         .library!
                         .exchangeds
-                        .map((book) => BookDetails(book: book))
+                        .map((book) => BookDetails(
+                              book: book,
+                              exchanged: true,
+                            ))
                         .toList(),
                   ),
                   CustomGrid(

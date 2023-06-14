@@ -18,6 +18,7 @@ BookData _$BookDataFromJson(Map<String, dynamic> json) => BookData(
       isbn13: json['isbn13'] as String?,
       cover: json['cover'] as String?,
       id: json['id'] as String?,
+      toEchanged: json['toEchanged'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$BookDataToJson(BookData instance) => <String, dynamic>{
@@ -30,4 +31,5 @@ Map<String, dynamic> _$BookDataToJson(BookData instance) => <String, dynamic>{
       'cover': instance.cover,
       'reviews': instance.reviews,
       'id': instance.id,
+      'toEchanged': instance.toEchanged,
     };

@@ -25,10 +25,43 @@ mixin _$HomePageStore on HomePageBase, Store {
     });
   }
 
+  late final _$booksAtom = Atom(name: 'HomePageBase.books', context: context);
+
+  @override
+  ObservableList<Exchanged> get books {
+    _$booksAtom.reportRead();
+    return super.books;
+  }
+
+  @override
+  set books(ObservableList<Exchanged> value) {
+    _$booksAtom.reportWrite(value, super.books, () {
+      super.books = value;
+    });
+  }
+
+  late final _$isLoadingAtom =
+      Atom(name: 'HomePageBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-activeRaffles: ${activeRaffles}
+activeRaffles: ${activeRaffles},
+books: ${books},
+isLoading: ${isLoading}
     ''';
   }
 }

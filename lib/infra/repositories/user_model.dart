@@ -143,7 +143,7 @@ class UserModel extends Model {
       Map<String, dynamic> data = userData.toJson();
       data["library"] = userData.library!.toJson();
 
-      await _firestore.collection("users").doc(_firebaseUser!.uid).set(data);
+      await _firestore.collection("users").doc(userData.id).set(data);
     }
   }
 
@@ -300,6 +300,19 @@ class UserModel extends Model {
     await updateUser(
         userData: UserData.fromEntity(
             userData!.toEntity().copyWith(library: library)));
+  }
+
+  Future<void> addNewBookExchangedToOtherUser(
+      Book book, UserData usertoAdd) async {
+    Library library = usertoAdd.library!.toEntity();
+    List<Book> exchangeds = [];
+    exchangeds.addAll(library.exchangeds);
+
+    if (verifeBook(exchangeds, book)) return;
+    exchangeds.add(book);
+    library = library.copyWith(exchangeds: exchangeds);
+    await _saveUserData(
+        UserData.fromEntity(usertoAdd.toEntity().copyWith(library: library)));
   }
 
   bool verifeBook(List<Book> books, Book book) {

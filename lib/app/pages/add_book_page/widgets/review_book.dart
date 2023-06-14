@@ -43,7 +43,7 @@ class ReviewBook extends StatelessWidget {
       Container(
         padding: const EdgeInsets.only(left: 5, top: 8),
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.55,
+        height: MediaQuery.of(context).size.height * 0.45,
         decoration: BoxDecoration(
             border: Border.all(color: Theme.of(context).primaryColor),
             borderRadius: BorderRadius.circular(20)),

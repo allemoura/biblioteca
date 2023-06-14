@@ -10,10 +10,10 @@ part 'raffle_data.g.dart';
 
 @JsonSerializable()
 class RaffleData {
-  @JsonKey(toJson: bookParamToJson, includeFromJson: false)
+  @JsonKey(toJson: bookParamToJson, fromJson: bookParamFromJson)
   final BookData? book;
   final String cep;
-  @JsonKey(toJson: createdByParamToJson, includeFromJson: false)
+  @JsonKey(toJson: createdByParamToJson, fromJson: winnerParamFromJson)
   final UserData? createdBy;
   @ServerTimestampConverter()
   final DateTime toRaffle;
@@ -24,9 +24,9 @@ class RaffleData {
   @TimestampConverter()
   final DateTime? confirmDate;
   final bool toSend;
-  @JsonKey(toJson: winnerParamToJson, includeFromJson: false)
+  @JsonKey(toJson: winnerParamToJson, fromJson: winnerParamFromJson)
   final UserData? winner;
-  @JsonKey(toJson: participantsParamToJson, includeFromJson: false)
+  @JsonKey(toJson: participantsParamToJson, fromJson: participantsParamFromJson)
   final List<UserData>? participants;
   final String? id;
 
@@ -95,5 +95,11 @@ List<String>? participantsParamToJson(List<UserData>? usersData) {
   if (usersData == null) return null;
   return usersData.map((e) => e.id!).toList();
 }
+
+List<UserData>? participantsParamFromJson(List<dynamic> usersData) => [];
+
+UserData? winnerParamFromJson(dynamic usersData) => null;
+
+BookData? bookParamFromJson(dynamic book) => null;
 
 String bookParamToJson(BookData? book) => book!.id!;

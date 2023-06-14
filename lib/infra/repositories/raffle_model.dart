@@ -83,10 +83,13 @@ class RaffleModel extends Model {
       Raffle raffle, Map<String, dynamic> raffleData) async {
     final List<User> participants = [];
 
-    for (final userId in raffleData["participants"]) {
-      final user = await getUser(userId);
-      participants.add(user!);
+    if (raffleData.containsKey("participants")) {
+      for (final userId in raffleData["participants"]) {
+        final user = await getUser(userId);
+        participants.add(user!);
+      }
     }
+
     return raffle.copyWith(
         book: await getBook(raffleData["book"]),
         createdBy: await getUser(raffleData["createdBy"]),
@@ -118,14 +121,15 @@ class RaffleModel extends Model {
   }
 
   Future<void> addNewParticipant(Raffle raffle, User participant) async {
-    final newParticipants = raffle.participants;
+    List<User> newParticipants = [];
+    newParticipants.addAll(raffle.participants);
     newParticipants.add(participant);
     raffle = raffle.copyWith(participants: newParticipants);
 
-    final result = await _firestore
-        .collection("raffles")
-        .add(RaffleData.fromEntity(raffle).toJson());
-    raffle = raffle.copyWith(id: result.id);
+    // final result = await _firestore
+    //     .collection("raffles")
+    //     .add(RaffleData.fromEntity(raffle).toJson());
+    // raffle = raffle.copyWith(id: result.id);
 
     await _firestore
         .collection("raffles")
