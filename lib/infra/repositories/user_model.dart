@@ -26,32 +26,33 @@ class UserModel extends Model {
       ScopedModel.of<UserModel>(context);
 
   @override
-  void addListener(VoidCallback listener) {
+  Future<void> addListener(VoidCallback listener) async {
+    isLoding = true;
     super.addListener(listener);
 
-    _loadCurrentUser();
+    await loadCurrentUser();
+    isLoding = false;
+
+    notifyListeners();
   }
 
-  Future<void> _loadCurrentUser() async {
+  Future<void> loadCurrentUser() async {
     _firebaseUser ??= _auth.currentUser;
 
     if (_firebaseUser != null) {
-      if (userData == null) {
-        DocumentSnapshot docUser = await _firestore
-            .collection("users")
-            .doc(_auth.currentUser!.uid)
-            .get();
+      DocumentSnapshot docUser = await _firestore
+          .collection("users")
+          .doc(_auth.currentUser!.uid)
+          .get();
 
-        final data = docUser.data() as Map<String, dynamic>;
+      final data = docUser.data() as Map<String, dynamic>;
 
-        userData = UserData.fromJson(data);
+      userData = UserData.fromJson(data);
 
-        userData = UserData.fromEntity(userData!
-            .toEntity()
-            .copyWith(library: await convertLibrary(data["library"])));
-      }
+      userData = UserData.fromEntity(userData!
+          .toEntity()
+          .copyWith(library: await convertLibrary(data["library"])));
     }
-    notifyListeners();
   }
 
   bool isLoggedIn() {
@@ -98,17 +99,17 @@ class UserModel extends Model {
       email: email,
       password: pass,
     )
-        .then((user) async {
-      _userCredential = user;
-      _firebaseUser = _auth.currentUser;
+        .then((userCredential) async {
+      _firebaseUser = userCredential.user;
 
       await _saveUserData(UserData(
         name: name,
         email: email,
+        id: _firebaseUser!.uid,
         library:
             LibraryData(reads: [], toRead: [], exchangeds: [], donateds: []),
       ));
-      await _loadCurrentUser();
+      await loadCurrentUser();
 
       isLoding = false;
       notifyListeners();
@@ -128,7 +129,7 @@ class UserModel extends Model {
 
     _auth.signInWithEmailAndPassword(email: email, password: pass).then((user) {
       _userCredential = user;
-      _loadCurrentUser();
+      loadCurrentUser();
 
       isLoding = false;
       notifyListeners();
@@ -190,7 +191,7 @@ class UserModel extends Model {
     try {
       await _saveUserData(userData);
 
-      await _loadCurrentUser();
+      await loadCurrentUser();
 
       isLoding = false;
       notifyListeners();
@@ -241,7 +242,7 @@ class UserModel extends Model {
         library:
             LibraryData(reads: [], toRead: [], exchangeds: [], donateds: []),
       ));
-      await _loadCurrentUser();
+      await loadCurrentUser();
 
       isLoding = false;
       notifyListeners();

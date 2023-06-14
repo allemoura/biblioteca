@@ -1,7 +1,5 @@
 import 'package:biblioteca/app/pages/library_page/widgets/book_details.dart';
 import 'package:biblioteca/app/widgets/custom_grid.dart';
-import 'package:biblioteca/app/widgets/custom_text.dart';
-import 'package:biblioteca/domain/entities/book.dart';
 import 'package:biblioteca/domain/entities/exchanged.dart';
 import 'package:biblioteca/infra/repositories/book_model.dart';
 import 'package:biblioteca/infra/repositories/user_model.dart';
@@ -15,14 +13,14 @@ class SelectBookExchanged extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const CustomText(value: "Selecione o livro para troca"),
+        title:  const Text( "Selecione o livro para troca", ),
       ),
       body: CustomGrid(
           content: UserModel.of(context)
               .userData!
               .library!
               .toEntity()
-              .exchangeds
+              .reads
               .map((book) => InkWell(
                     onTap: () async {
                       await BookModel()

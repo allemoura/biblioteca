@@ -89,8 +89,8 @@ class _AddRafflesPageState extends State<AddRafflesPage> {
                     store.selectedDate == null ||
                     store.book == null) {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: CustomText(
-                    value: "Ops, preencha todos os campos",
+                      content: Text(
+                    "Ops, preencha todos os campos",
                   )));
                 } else {
                   await store

@@ -1,4 +1,3 @@
-import 'package:biblioteca/domain/entities/book.dart';
 import 'package:biblioteca/domain/entities/exchanged.dart';
 import 'package:biblioteca/domain/entities/raffle.dart';
 import 'package:biblioteca/domain/entities/user.dart';

@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomePageStore store = HomePageStore();
-
+  int count =0;
   @override
   void initState() {
     super.initState();
@@ -37,11 +37,13 @@ class _HomePageState extends State<HomePage> {
       return Scaffold(
         drawer: HomeDrawer(model: model),
         body: Observer(builder: (context) {
-          if (model.userData == null) {
+          if (model.isLoding) {
             return progressIndicator;
           }
           if (store.isLoading) {
-            store.init(model.userData?.id);
+            if (model.userData != null) {
+              store.init(model.userData?.id);
+            }
           }
 
           return Column(

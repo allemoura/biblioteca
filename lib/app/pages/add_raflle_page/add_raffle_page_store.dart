@@ -1,7 +1,6 @@
 import 'package:biblioteca/domain/entities/book.dart';
 import 'package:biblioteca/domain/entities/raffle.dart';
 import 'package:biblioteca/domain/entities/user.dart';
-import 'package:biblioteca/infra/models/user_data.dart';
 import 'package:biblioteca/infra/repositories/raffle_model.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
