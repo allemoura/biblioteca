@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 class BookCard extends StatelessWidget {
   final Book book;
   final bool? isRead;
-  const BookCard({super.key, required this.book, this.isRead});
+  final bool isJustSelect;
+  const BookCard(
+      {super.key, required this.book, this.isRead, this.isJustSelect = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,16 @@ class BookCard extends StatelessWidget {
         verifiedContainsBook(library.toRead, book);
 
     return CustomCard(
-      height: 220,
+      height: 260,
       content: InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => BookReviewsPage(book: book)));
-        },
+        onTap: isJustSelect
+            ? null
+            : () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BookReviewsPage(book: book)));
+              },
         child: SizedBox(
           child: Row(
             children: [
@@ -65,7 +69,7 @@ class BookCard extends StatelessWidget {
                       CustomText(
                         value: "ISBN-13: ${book.isbn13}",
                       ),
-                    if (!haveBook)
+                    if (!haveBook && !isJustSelect)
                       Padding(
                         padding: const EdgeInsets.only(left: 50, top: 15),
                         child: CustomButton(

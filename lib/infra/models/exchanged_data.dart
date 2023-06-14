@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:biblioteca/domain/entities/exchanged.dart';
 import 'package:biblioteca/infra/models/book_data.dart';
 import 'package:biblioteca/infra/models/user_data.dart';

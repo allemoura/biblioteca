@@ -1,3 +1,4 @@
+import 'package:biblioteca/app/pages/add_raflle_page/add_raffle_page.dart';
 import 'package:biblioteca/app/pages/my_raffles_page/my_raffles_page_store.dart';
 import 'package:biblioteca/app/widgets/cards/raffle_card.dart';
 import 'package:biblioteca/app/widgets/custom_text.dart';
@@ -34,7 +35,12 @@ class _MyRafflesPageState extends State<MyRafflesPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AddRafflesPage()));
+          },
           child: const Icon(Icons.add, size: 40),
         ),
         body: store.isLoading
@@ -44,8 +50,8 @@ class _MyRafflesPageState extends State<MyRafflesPage> {
             : ListView(
                 children: store.raffles
                     .map((raffle) => Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child:RaffleCard(raffle: raffle)))
+                        padding: const EdgeInsets.only(top: 15),
+                        child: RaffleCard(raffle: raffle)))
                     .toList(),
               ),
       ),

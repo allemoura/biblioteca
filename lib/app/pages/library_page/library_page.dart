@@ -60,8 +60,10 @@ class _LibraryPageState extends State<LibraryPage>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  SearchPage(isRead: store.index == 0)));
+                              builder: (context) => SearchPage(
+                                    isRead: store.index == 0,
+                                    filterBook: true,
+                                  )));
                     },
                     child: const Icon(Icons.add, size: 40),
                   )

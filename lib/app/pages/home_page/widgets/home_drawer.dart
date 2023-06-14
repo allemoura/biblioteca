@@ -1,4 +1,5 @@
 import 'package:biblioteca/app/pages/list_exchangeds_page/list_exchangeds_page.dart';
+import 'package:biblioteca/app/pages/user_profile_page/user_profile_page.dart';
 import 'package:biblioteca/app/widgets/custom_circular_image.dart';
 import 'package:biblioteca/app/widgets/custom_text.dart';
 import 'package:biblioteca/infra/repositories/user_model.dart';
@@ -35,7 +36,12 @@ class HomeDrawer extends StatelessWidget {
               value: "Meus Dados",
               fontSize: 18,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UserProfilePage()));
+            },
           ),
           ListTile(
             title: const CustomText(

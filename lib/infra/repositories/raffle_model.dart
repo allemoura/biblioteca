@@ -126,10 +126,17 @@ class RaffleModel extends Model {
     newParticipants.add(participant);
     raffle = raffle.copyWith(participants: newParticipants);
 
-    // final result = await _firestore
-    //     .collection("raffles")
-    //     .add(RaffleData.fromEntity(raffle).toJson());
-    // raffle = raffle.copyWith(id: result.id);
+    await _firestore
+        .collection("raffles")
+        .doc(raffle.id)
+        .set(RaffleData.fromEntity(raffle).toJson());
+  }
+
+  Future<void> addNewRaffle(Raffle raffle) async {
+    final result = await _firestore
+        .collection("raffles")
+        .add(RaffleData.fromEntity(raffle).toJson());
+    raffle = raffle.copyWith(id: result.id);
 
     await _firestore
         .collection("raffles")

@@ -58,6 +58,10 @@ class UserModel extends Model {
     return _firebaseUser != null;
   }
 
+  void setUserName(String name) {
+    userData = UserData.fromEntity(userData!.toEntity().copyWith(name: name));
+  }
+
   Future<Library> convertLibrary(Map<String, dynamic> data) async {
     final toRead = await getBook(data["toRead"]);
     final reads = await getBook(data["reads"]);

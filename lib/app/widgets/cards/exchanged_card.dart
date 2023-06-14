@@ -42,7 +42,7 @@ class ExchangedCard extends StatelessWidget {
                           "Troca de ${exchanged.bookExchanged!.title} por ${exchanged.bookSend.title}",
                     ),
                     if (userId == exchanged.userExchanged!.id) ...[
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       if (exchanged.accepted == null) ...[
                         CustomText(
                           fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class ExchangedCard extends StatelessWidget {
                       ],
                     ],
                     if (userId == exchanged.userSend.id) ...[
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       if (exchanged.accepted == null)
                         Row(
                           children: [

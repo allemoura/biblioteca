@@ -18,6 +18,7 @@ class RaffleCard extends StatelessWidget {
     final userIsInRaffle =
         verifeUserIsInRaffle(raffle.participants, currentUser);
     return CustomCard(
+      height: 200,
       content: SizedBox(
         child: Row(
           children: [
@@ -51,8 +52,10 @@ class RaffleCard extends StatelessWidget {
                                 "O sorteador deseja combinar a entrega na região do seguinte cep: ${raffle.cep}"),
                     if (raffle.createdBy!.id != currentUser.id)
                       Padding(
-                        padding: const EdgeInsets.only(left: 160, top: 25),
+                        padding: EdgeInsets.only(
+                            left: userIsInRaffle ? 0 : 160, right: 10, top: 25),
                         child: CustomButton(
+                          width: userIsInRaffle ? 400 : null,
                           enable: !userIsInRaffle,
                           title: userIsInRaffle
                               ? "Você já esta participando"
