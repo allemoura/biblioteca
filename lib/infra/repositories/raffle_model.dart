@@ -100,7 +100,7 @@ class RaffleModel extends Model {
   }
 
   Future<Book> getBook(String bookId) async {
-    final resultBook = await _firestore.collection("books").doc(bookId).get();
+    final resultBook = await _firestore.collection("books").doc(bookId.trim()).get();
     final bookData = resultBook.data();
     final bookEntity = BookData.fromJson(bookData!).toEntity();
     final List<BookReview> reviews = [];

@@ -62,7 +62,6 @@ class _LibraryPageState extends State<LibraryPage>
                           MaterialPageRoute(
                               builder: (context) => SearchPage(
                                     isRead: store.index == 0,
-                                    filterBook: true,
                                   )));
                     },
                     child: const Icon(Icons.add, size: 40),

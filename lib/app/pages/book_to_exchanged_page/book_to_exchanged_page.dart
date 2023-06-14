@@ -22,7 +22,7 @@ class _BookToExchangedPageState extends State<BookToExchangedPage> {
 
   @override
   void initState() {
-    store.init(context, widget.book.reviews);
+    store.init(context, widget.book);
     super.initState();
   }
 

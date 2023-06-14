@@ -69,12 +69,20 @@ class UserModel extends Model {
     final donateds = await getBook(data["donateds"]);
     final exchangeds = await getBook(data["exchangeds"]);
 
-    return const Library(toRead: [], reads: [], exchangeds: [], donateds: [])
+    final toExchangeds = await getBook(data["toExchangeds"]);
+
+    return const Library(
+            toRead: [],
+            toExchangeds: [],
+            reads: [],
+            exchangeds: [],
+            donateds: [])
         .copyWith(
             toRead: toRead,
             reads: reads,
             exchangeds: exchangeds,
-            donateds: donateds);
+            donateds: donateds,
+            toExchangeds: toExchangeds);
   }
 
   Future<List<Book>> getBook(List<dynamic> books) async {
@@ -127,9 +135,11 @@ class UserModel extends Model {
     isLoding = true;
     notifyListeners();
 
-    _auth.signInWithEmailAndPassword(email: email, password: pass).then((user) {
+    _auth
+        .signInWithEmailAndPassword(email: email, password: pass)
+        .then((user) async {
       _userCredential = user;
-      loadCurrentUser();
+      await loadCurrentUser();
 
       isLoding = false;
       notifyListeners();
@@ -302,6 +312,19 @@ class UserModel extends Model {
     if (verifeBook(exchangeds, book)) return;
     exchangeds.add(book);
     library = library.copyWith(exchangeds: exchangeds);
+    await updateUser(
+        userData: UserData.fromEntity(
+            userData!.toEntity().copyWith(library: library)));
+  }
+
+  Future<void> addNewBookToExchanged(Book book) async {
+    Library library = userData!.library!.toEntity();
+    List<Book> toExchangeds = [];
+    toExchangeds.addAll(library.toExchangeds);
+
+    if (verifeBook(toExchangeds, book)) return;
+    toExchangeds.add(book);
+    library = library.copyWith(toExchangeds: toExchangeds);
     await updateUser(
         userData: UserData.fromEntity(
             userData!.toEntity().copyWith(library: library)));

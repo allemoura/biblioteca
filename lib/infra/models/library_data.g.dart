@@ -10,6 +10,9 @@ LibraryData _$LibraryDataFromJson(Map<String, dynamic> json) => LibraryData(
       reads: (json['reads'] as List<dynamic>?)
           ?.map((e) => BookData.fromJson(e as Map<String, dynamic>))
           .toList(),
+      toExchangeds: (json['toExchangeds'] as List<dynamic>?)
+          ?.map((e) => BookData.fromJson(e as Map<String, dynamic>))
+          .toList(),
       toRead: (json['toRead'] as List<dynamic>?)
           ?.map((e) => BookData.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -27,4 +30,5 @@ Map<String, dynamic> _$LibraryDataToJson(LibraryData instance) =>
       'toRead': paramToJson(instance.toRead),
       'exchangeds': paramToJson(instance.exchangeds),
       'donateds': paramToJson(instance.donateds),
+      'toExchangeds': paramToJson(instance.toExchangeds),
     };

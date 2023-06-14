@@ -49,9 +49,9 @@ class CustomTop extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
-                    const Rate(
+                    Rate(
                       iconSize: 25,
-                      initialValue: 0,
+                      initialValue: sumStars(),
                       readOnly: true,
                     ),
                   ],
@@ -62,5 +62,16 @@ class CustomTop extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double sumStars() {
+    if (book.reviews.isEmpty) return 0;
+    final stars = book.reviews.map((e) => e.stars);
+
+    double sumStars = 0;
+    for (final star in stars) {
+      sumStars += star;
+    }
+    return sumStars / stars.length;
   }
 }

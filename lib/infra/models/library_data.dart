@@ -14,15 +14,27 @@ class LibraryData {
   final List<BookData>? exchangeds;
   @JsonKey(toJson: paramToJson, includeFromJson: true)
   final List<BookData>? donateds;
+  @JsonKey(toJson: paramToJson, includeFromJson: true)
+  final List<BookData>? toExchangeds;
 
-  LibraryData({this.reads, this.toRead, this.exchangeds, this.donateds});
+  LibraryData(
+      {this.reads,
+      this.toExchangeds,
+      this.toRead,
+      this.exchangeds,
+      this.donateds});
   factory LibraryData.fromEntity(Library entity) => LibraryData(
+      toExchangeds:
+          entity.toExchangeds.map((e) => BookData.fromEntity(e)).toList(),
       reads: entity.reads.map((e) => BookData.fromEntity(e)).toList(),
       toRead: entity.toRead.map((e) => BookData.fromEntity(e)).toList(),
       exchangeds: entity.exchangeds.map((e) => BookData.fromEntity(e)).toList(),
       donateds: entity.donateds.map((e) => BookData.fromEntity(e)).toList());
 
   Library toEntity() => Library(
+      toExchangeds: toExchangeds == null
+          ? []
+          : toExchangeds!.map((e) => e.toEntity()).toList(),
       reads: reads == null ? [] : reads!.map((e) => e.toEntity()).toList(),
       toRead: toRead == null ? [] : toRead!.map((e) => e.toEntity()).toList(),
       exchangeds: exchangeds == null

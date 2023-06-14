@@ -20,6 +20,7 @@ mixin _$Library {
   List<Book> get toRead => throw _privateConstructorUsedError;
   List<Book> get exchangeds => throw _privateConstructorUsedError;
   List<Book> get donateds => throw _privateConstructorUsedError;
+  List<Book> get toExchangeds => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LibraryCopyWith<Library> get copyWith => throw _privateConstructorUsedError;
@@ -34,7 +35,8 @@ abstract class $LibraryCopyWith<$Res> {
       {List<Book> reads,
       List<Book> toRead,
       List<Book> exchangeds,
-      List<Book> donateds});
+      List<Book> donateds,
+      List<Book> toExchangeds});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$LibraryCopyWithImpl<$Res, $Val extends Library>
     Object? toRead = null,
     Object? exchangeds = null,
     Object? donateds = null,
+    Object? toExchangeds = null,
   }) {
     return _then(_value.copyWith(
       reads: null == reads
@@ -72,6 +75,10 @@ class _$LibraryCopyWithImpl<$Res, $Val extends Library>
           ? _value.donateds
           : donateds // ignore: cast_nullable_to_non_nullable
               as List<Book>,
+      toExchangeds: null == toExchangeds
+          ? _value.toExchangeds
+          : toExchangeds // ignore: cast_nullable_to_non_nullable
+              as List<Book>,
     ) as $Val);
   }
 }
@@ -87,7 +94,8 @@ abstract class _$$_LibraryCopyWith<$Res> implements $LibraryCopyWith<$Res> {
       {List<Book> reads,
       List<Book> toRead,
       List<Book> exchangeds,
-      List<Book> donateds});
+      List<Book> donateds,
+      List<Book> toExchangeds});
 }
 
 /// @nodoc
@@ -104,6 +112,7 @@ class __$$_LibraryCopyWithImpl<$Res>
     Object? toRead = null,
     Object? exchangeds = null,
     Object? donateds = null,
+    Object? toExchangeds = null,
   }) {
     return _then(_$_Library(
       reads: null == reads
@@ -122,6 +131,10 @@ class __$$_LibraryCopyWithImpl<$Res>
           ? _value._donateds
           : donateds // ignore: cast_nullable_to_non_nullable
               as List<Book>,
+      toExchangeds: null == toExchangeds
+          ? _value._toExchangeds
+          : toExchangeds // ignore: cast_nullable_to_non_nullable
+              as List<Book>,
     ));
   }
 }
@@ -133,11 +146,13 @@ class _$_Library implements _Library {
       {required final List<Book> reads,
       required final List<Book> toRead,
       required final List<Book> exchangeds,
-      required final List<Book> donateds})
+      required final List<Book> donateds,
+      required final List<Book> toExchangeds})
       : _reads = reads,
         _toRead = toRead,
         _exchangeds = exchangeds,
-        _donateds = donateds;
+        _donateds = donateds,
+        _toExchangeds = toExchangeds;
 
   final List<Book> _reads;
   @override
@@ -171,9 +186,17 @@ class _$_Library implements _Library {
     return EqualUnmodifiableListView(_donateds);
   }
 
+  final List<Book> _toExchangeds;
+  @override
+  List<Book> get toExchangeds {
+    if (_toExchangeds is EqualUnmodifiableListView) return _toExchangeds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_toExchangeds);
+  }
+
   @override
   String toString() {
-    return 'Library(reads: $reads, toRead: $toRead, exchangeds: $exchangeds, donateds: $donateds)';
+    return 'Library(reads: $reads, toRead: $toRead, exchangeds: $exchangeds, donateds: $donateds, toExchangeds: $toExchangeds)';
   }
 
   @override
@@ -185,7 +208,9 @@ class _$_Library implements _Library {
             const DeepCollectionEquality().equals(other._toRead, _toRead) &&
             const DeepCollectionEquality()
                 .equals(other._exchangeds, _exchangeds) &&
-            const DeepCollectionEquality().equals(other._donateds, _donateds));
+            const DeepCollectionEquality().equals(other._donateds, _donateds) &&
+            const DeepCollectionEquality()
+                .equals(other._toExchangeds, _toExchangeds));
   }
 
   @override
@@ -194,7 +219,8 @@ class _$_Library implements _Library {
       const DeepCollectionEquality().hash(_reads),
       const DeepCollectionEquality().hash(_toRead),
       const DeepCollectionEquality().hash(_exchangeds),
-      const DeepCollectionEquality().hash(_donateds));
+      const DeepCollectionEquality().hash(_donateds),
+      const DeepCollectionEquality().hash(_toExchangeds));
 
   @JsonKey(ignore: true)
   @override
@@ -208,7 +234,8 @@ abstract class _Library implements Library {
       {required final List<Book> reads,
       required final List<Book> toRead,
       required final List<Book> exchangeds,
-      required final List<Book> donateds}) = _$_Library;
+      required final List<Book> donateds,
+      required final List<Book> toExchangeds}) = _$_Library;
 
   @override
   List<Book> get reads;
@@ -218,6 +245,8 @@ abstract class _Library implements Library {
   List<Book> get exchangeds;
   @override
   List<Book> get donateds;
+  @override
+  List<Book> get toExchangeds;
   @override
   @JsonKey(ignore: true)
   _$$_LibraryCopyWith<_$_Library> get copyWith =>

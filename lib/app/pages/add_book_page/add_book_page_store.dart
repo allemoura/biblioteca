@@ -40,7 +40,7 @@ abstract class AddBookPageBase with Store {
   setRate(double value) => rate = value;
 
   Future<void> addBook(Book book) async {
-    if (reviewController.text.isNotEmpty) {
+    if (reviewController.text.isNotEmpty || rate != 0) {
       if (bookReview != null) {
         bookReview = bookReview?.copyWith(
             stars: rate,

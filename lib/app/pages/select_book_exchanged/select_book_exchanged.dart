@@ -13,14 +13,16 @@ class SelectBookExchanged extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  const Text( "Selecione o livro para troca", ),
+        title: const Text(
+          "Selecione o livro para troca",
+        ),
       ),
       body: CustomGrid(
           content: UserModel.of(context)
               .userData!
               .library!
               .toEntity()
-              .reads
+              .toExchangeds
               .map((book) => InkWell(
                     onTap: () async {
                       await BookModel()
